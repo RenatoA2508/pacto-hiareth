@@ -43,3 +43,7 @@ Attack2 no se utiliza. El License.txt original acompaña los PNG.
 Plataformas, portales, marcadores de checkpoint, retículas del laboratorio y objetivos de entrenamiento se dibujan con Phaser Graphics y CSS. Son elementos propios del proyecto, separados del fondo y de su colisión. No representan nuevos personajes ni sustituyen el sprite de Aine.
 
 Aine, enemigos de ciudad y recursos de actos posteriores siguen pendientes. Los enlaces a esqueletos, lugares abandonados y fondo de luna se conservan en la fuente maestra; no se integraron sin el contenido narrativo correspondiente. El Boss Fight continúa bloqueado.
+
+## Actualización 0.5.0
+
+Selector global Fácil/Media/Hard persistente, aplicado a los dos actos disponibles y reutilizable por los siguientes. Combate y geometría ajustados sin modificar el relato ni las bajas. Ver tabla de balance en README.md. El bosque ahora dibuja seis capas: se omiten las capas planas 8 y 10 que producían la franja verde y se amplía el paisaje uniformemente por código, sin modificar PNG.

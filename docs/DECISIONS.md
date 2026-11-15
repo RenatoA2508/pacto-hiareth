@@ -59,3 +59,7 @@
 **NARRATIVA:** se integran los 57 párrafos de fogata/llegada a ciudad y los 54 de recuerdos/transición al limbo, respetando el Word. Solo se aplica Airan → Aidan en el párrafo fuente 118, según la corrección del usuario, sin modificar el original. No se reescribe el diálogo según las bajas.
 
 **LÍMITE:** tras el último párrafo existente se muestra «Fin de esta versión». No representa el final ficticio del juego. Actos 3, 4, final y Boss Fight siguen pendientes/bloqueados. La nota anterior «todavía no se implementaron diálogos» corresponde al primer incremento; queda superada por estas integraciones.
+
+## 2026-11-15 — Dificultad global y composición del bosque
+
+El usuario autorizó aumentar la dificultad con libertad de diseño manteniendo la coherencia narrativa y propuso Fácil/Media/Hard para los cuatro actos. Se implementa el selector global, con cinco vidas en Fácil y tres en Media/Hard, distintas ventanas de invulnerabilidad y presión de slimes; plataformas más estrechas y huecos mayores, más tres cortes adicionales en las ruinas. No se añaden personajes ni diálogos. El entrenamiento conserva sus parámetros de práctica. La preferencia se aplica al entrar en un acto; los checkpoints y las bajas permanecen válidos entre perfiles.

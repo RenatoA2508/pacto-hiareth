@@ -20,7 +20,7 @@ npm run preview  # Revisar la compilación
 npm run package  # Generar ZIP de web y fuente en release/
 ```
 
-## Contenido de la versión 0.4
+## Contenido de la versión 0.5
 
 - **Nivel 1 — Tierra, mar y cielo:** fondo de naturaleza por capas, seis slimes con vistas laterales reales, plataformas, tres huecos, dos checkpoints y portal. Es posible terminar sin derrotar slimes; la ruta con cero bajas fue comprobada en navegador.
 - **Nivel 2 — Vuela alto:** cinco capas del fondo de ciudad aprobado, plataformas, tres huecos, dos checkpoints y portal. Los ovnis forman parte del fondo; no se inventan enemigos interactivos para esta zona.
@@ -89,3 +89,17 @@ Aidan: [Evil Wizard 2 de LuizMelo](https://luizmelo.itch.io/evil-wizard-2), CC0.
 `npm run package` crea ZIP de web estática y de fuente con `dist/`, ambos con instrucciones `EJECUTAR.txt`. Se verifican los ZIP y se excluyen `.git`, credenciales, `node_modules` y originales de terceros. El código y los documentos están versionados; los paquetes locales de `release/` no se suben a Git.
 
 Para servir el paquete web sin instalar Node: `python3 -m http.server 8080` y abrir `http://localhost:8080`. Para el paquete de fuente, también se puede servir su `dist/` con `python3 -m http.server 8080 --directory dist`.
+
+## Dificultad global
+
+El menú permite elegir Fácil, Media o Hard. Se guarda para todos los actos y se aplica al entrar o reintentar un nivel; cambiarla conserva checkpoints y bajas. Los actos 3 y 4 podrán usar el mismo perfil cuando estén implementados. Las prácticas conservan su balance didáctico.
+
+| Perfil | Vida | Invulnerabilidad | Slime: velocidad / pausa entre ataques | Huecos principales | Ruinas |
+| --- | --- | --- | --- | --- | --- |
+| Fácil | 5 | 1200 ms | 55 px/s / 2000 ms | 120 px | Tres huecos originales |
+| Media | 3 | 900 ms | 85 px/s / 1450 ms | 180 px | Tres huecos adicionales de 90 px |
+| Hard | 3 | 650 ms | 110 px/s / 1150 ms | 195 px | Tres huecos adicionales de 130 px |
+
+Media y Hard estrechan las plataformas elevadas 20 y 40 px respectivamente. Se mantiene el salto, el daño por golpe y la anticipación visible del slime; las bajas no dan puntos. Los perfiles están centralizados en src/config/difficulty.js. Las partidas anteriores usan Media por defecto.
+
+El fondo del bosque omite las capas 8 y 10 de suelo decorativo plano y amplía uniformemente las seis capas restantes para que las bases de los árboles queden bajo el terreno físico. Los PNG originales permanecen intactos.

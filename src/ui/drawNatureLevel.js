@@ -2,9 +2,11 @@ import { GAME } from '../config/game.js';
 import { NATURE_LAYERS } from '../config/level1.js';
 
 export function drawNatureLevel(scene, platforms) {
-  const layers = NATURE_LAYERS.map(({ file, factor }) => {
+  // Las capas 8 y 10 son suelo plano decorativo; el suelo físico ya se dibuja abajo.
+  // Ampliar uniformemente el paisaje lleva las bases de los árboles bajo el terreno.
+  const layers = NATURE_LAYERS.filter(({ file }) => !['8.png', '10.png'].includes(file)).map(({ file, factor }) => {
     const layer = scene.add.tileSprite(0, 0, GAME.width, GAME.height, `nature-${file}`).setOrigin(0).setScrollFactor(0);
-    layer.setTileScale(GAME.height / 324);
+    layer.setTileScale(GAME.height / 275);
     return { layer, factor };
   });
   const surfaces = scene.physics.add.staticGroup();

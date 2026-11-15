@@ -1,3 +1,4 @@
+import { difficulty, levelForDifficulty, playerCombat, slimeCombat } from '../config/difficulty.js';
 import Phaser from 'phaser';
 import { GAME } from '../config/game.js';
 import { LEVEL1 } from '../config/level1.js';
@@ -11,8 +12,12 @@ import { drawCityLevel } from '../ui/drawCityLevel.js';
 import { createDiagnostics } from '../ui/SceneDiagnostics.js';
 
 export class Level1Scene extends Phaser.Scene {
-  constructor(key = 'Level1', level = LEVEL1) { super(key); this.level = level; }
+  constructor(key = 'Level1', level = LEVEL1) { super(key); this.baseLevel = level; }
   create({ resume = false } = {}) {
+    const difficultyId = this.registry.get('storage').data.difficulty;
+    this.difficulty = difficulty(difficultyId);
+    this.level = levelForDifficulty(this.baseLevel, difficultyId);
+    this.enemyConfig = slimeCombat(difficultyId);
     this.ui = this.registry.get('ui'); this.ending = false;
     this.progress = new LevelProgress(this.registry.get('storage'), { id: this.level.id, checkpointCount: this.level.checkpoints.length, enemyCount: this.level.enemies.length });
     if (!resume) this.progress.reset();
@@ -22,10 +27,10 @@ export class Level1Scene extends Phaser.Scene {
     this.cameras.main.setBounds(0, 0, this.level.width, GAME.height);
     this.environment = this.level.biome === 'city' ? drawCityLevel(this, this.level.platforms) : drawNatureLevel(this, this.level.platforms);
     const spawn = this.level.checkpoints[this.progress.checkpoint];
-    this.player = new Player(this, spawn.x, spawn.feetY, { combat: true });
+    this.player = new Player(this, spawn.x, spawn.feetY, { combat: true, combatConfig: playerCombat(difficultyId) });
     this.enemies = this.level.enemies.flatMap((x, id) => {
       if (this.progress.killed.has(id)) return [];
-      const enemy = new SlimeEnemy(this, x, 468); enemy.progressId = id; return [enemy];
+      const enemy = new SlimeEnemy(this, x, 468, this.enemyConfig, this.level.platforms); enemy.progressId = id; return [enemy];
     });
     this.physics.add.collider(this.player, this.environment.surfaces);
     this.physics.add.collider(this.enemies, this.environment.surfaces);
@@ -69,6 +74,7 @@ export class Level1Scene extends Phaser.Scene {
   updateStats() {
     if (this.level.id === 1) this.ui.levelStats(this.player.vitals.current, this.player.vitals.max, this.progress.killed.size, this.progress.checkpoint);
     else this.ui.cityStats(this.player.vitals.current, this.player.vitals.max, this.progress.checkpoint);
+    document.querySelector('#hud-title').textContent += ` · ${this.difficulty.label}`;
   }
   damagePlayer(damage) {
     if (this.ending || !this.player.takeDamage(damage, this.time.now)) return false;

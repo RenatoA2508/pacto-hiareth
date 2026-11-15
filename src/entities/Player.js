@@ -6,7 +6,7 @@ import { AttackCycle } from '../systems/AttackCycle.js';
 import { attackRectangle } from '../systems/hitboxes.js';
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
-  constructor(scene, x, feetY, { combat = false } = {}) {
+  constructor(scene, x, feetY, { combat = false, combatConfig = PLAYER_COMBAT } = {}) {
     super(scene, x, feetY, 'aidan-idle');
     scene.add.existing(this);
     scene.physics.add.existing(this);
@@ -19,8 +19,9 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.nextStepAt = 0;
     this.wasGrounded = false;
     this.combatEnabled = combat;
-    this.vitals = new Vitals(PLAYER_COMBAT.maxHealth, PLAYER_COMBAT.invulnerabilityMs);
-    this.attackCycle = new AttackCycle(PLAYER_COMBAT.attack);
+    this.combatConfig = combatConfig;
+    this.vitals = new Vitals(combatConfig.maxHealth, combatConfig.invulnerabilityMs);
+    this.attackCycle = new AttackCycle(combatConfig.attack);
     this.facing = 1;
     this.hurtUntil = 0;
   }

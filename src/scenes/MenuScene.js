@@ -31,6 +31,7 @@ export class MenuScene extends Phaser.Scene {
     actions.push({ label: storage.data.playgroundCheckpoint ? 'Continuar prueba' : 'Prueba de movimiento', secondary: true, run: () => this.scene.start('Playground', { resume: storage.data.playgroundCheckpoint }) });
     actions.push({ label: 'Entrenamiento de combate', secondary: true, run: () => this.scene.start('Combat') });
     ui.panel({
+      difficultySelector: true,
       eyebrow: 'PLATAFORMAS 2D · EN DESARROLLO',
       title: 'El pacto<br>de <em>Hiareth</em>',
       description: 'Acompaña a Aidan por el bosque y las ruinas de la antigua federación. Alcanza los portales y continúa el relato.',

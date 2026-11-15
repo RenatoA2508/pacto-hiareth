@@ -41,3 +41,7 @@ El flujo es introducción → bosque → fogata y llegada a la ciudad → ciudad
 Las tres fuentes de docs/source/ están intactas. El Word narrativo recibido es «el pacto de hiraeth (1).docx» y la guía «ProyectoPrimerBimestre-2026-A.docx». Las grafías originales se conservan; las correcciones autorizadas solo se aplican a la adaptación generada y quedan registradas en sus metadatos.
 
 El usuario aprobó controles, ataque cercano, 3 HP, invulnerabilidad breve y ataque cercano del slime. Pidió contador de enemigos derrotados independiente de puntos y autorizó commits/push. DECISIONS.md registra las decisiones por incremento y VALIDATION.md las observaciones y sus límites.
+
+## Actualización 0.5.0
+
+Selector global Fácil/Media/Hard persistente, aplicado a los dos actos disponibles y reutilizable por los siguientes. Combate y geometría ajustados sin modificar el relato ni las bajas. Ver tabla de balance en README.md. El bosque ahora dibuja seis capas: se omiten las capas planas 8 y 10 que producían la franja verde y se amplía el paisaje uniformemente por código, sin modificar PNG.

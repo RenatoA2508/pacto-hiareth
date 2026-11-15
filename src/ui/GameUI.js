@@ -1,3 +1,4 @@
+import { DIFFICULTIES } from '../config/difficulty.js';
 export class GameUI extends EventTarget {
   constructor(storage) {
     super();
@@ -100,7 +101,7 @@ export class GameUI extends EventTarget {
   }
   hidePanel() { this.panels.replaceChildren(); }
 
-  panel({ eyebrow, title, description, note, modal = false, actions }) {
+  panel({ eyebrow, title, description, note, modal = false, actions, difficultySelector = false }) {
     this.clearInput();
     const panel = document.createElement('section');
     panel.className = `panel${modal ? ' modal' : ''}`;
@@ -122,7 +123,21 @@ export class GameUI extends EventTarget {
       buttons.append(button);
     });
     const small = document.createElement('p'); small.className = 'small-note'; small.textContent = note ?? '';
-    panel.append(top, heading, copy, buttons, small);
+    panel.append(top, heading, copy);
+    if (difficultySelector) {
+      const label = document.createElement('label'); label.className = 'difficulty-selector';
+      const text = document.createElement('span'); text.textContent = 'Dificultad del viaje';
+      const select = document.createElement('select'); select.setAttribute('aria-label', 'Dificultad del viaje');
+      for (const [key, value] of Object.entries(DIFFICULTIES)) {
+        const option = document.createElement('option'); option.value = key; option.textContent = value.label; select.append(option);
+      }
+      select.value = this.storage.data.difficulty;
+      const hint = document.createElement('small'); hint.id = 'difficulty-hint'; select.setAttribute('aria-describedby', hint.id);
+      const describe = () => { hint.textContent = DIFFICULTIES[select.value].description + '. Se aplica al entrar en cualquier acto.'; };
+      select.addEventListener('change', () => { this.storage.update({ difficulty: select.value }); describe(); this.announce(hint.textContent); });
+      describe(); label.append(text, select, hint); panel.append(label);
+    }
+    panel.append(buttons, small);
     // Tab queda dentro del diálogo; Escape lo gestiona la escena correspondiente.
     if (modal) panel.addEventListener('keydown', (event) => {
       if (event.key !== 'Tab') return;

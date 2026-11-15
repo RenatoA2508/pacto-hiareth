@@ -63,3 +63,9 @@ Estado automatizado final comprobado: 28 casos en cinco archivos (recursos 5, au
 Se guardaron cuatro capturas reales de la versión 0.4, sin diagnóstico superpuesto: menú, introducción, bosque y ciudad. HUD legible sobre ambos fondos; pausa y retorno al menú comprobados. La consola no registró errores ni advertencias en esa revisión. El intento de forzar el viewport móvil en esta sesión no cambió las dimensiones efectivas de la página, por lo que no constituye una nueva validación móvil. Se mantiene pendiente la prueba física.
 
 Compilación de producción y ZIP web/fuente 0.4.0 verificados, incluida integridad ZIP y exclusión de credenciales, Git, node_modules y ZIP originales. Las capturas se entregan por separado; el video no se ha grabado.
+
+## Versión 0.5.0 — fondo y dificultad
+
+Comprobado visualmente: desaparece la franja plana verde en el bosque; el paisaje llega al suelo físico. Selector Fácil/Media/Hard visible, selección Hard conservada tras recargar, Fácil inicia con 5/5 y Hard con 3/3. En navegador se sorteó el primer slime y se aterrizó tras el primer hueco Hard (195 px), x=1133, pies=470 y suelo activo. Pausa operativa; sin errores/advertencias de consola en la revisión final. Capturas en docs/qa/difficulty-0.5.jpg y forest-0.5.jpg.
+
+Tres casos nuevos prueban migración/persistencia de dificultad, integridad de apoyos y alcance del salto para los seis mapas (dos actos × tres perfiles), inmutabilidad de mapas originales y aumento de presión conservando anticipación del ataque. Total: 31 casos más contraste de 173 párrafos. La geometría de ciudad está cubierta automáticamente; no se ha recorrido en navegador cada variante completa ni certificado balance en dispositivos físicos.

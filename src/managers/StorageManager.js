@@ -1,6 +1,7 @@
+import { difficultyKey } from '../config/difficulty.js';
 const KEY = 'pacto-hiraeth:v1';
 const defaults = () => ({
-  version: 1, highScore: 0, levelReached: 0, currentLevel: 1, muted: false,
+  version: 1, difficulty: 'medium', highScore: 0, levelReached: 0, currentLevel: 1, muted: false,
   playgroundCheckpoint: false, prologuePage: 0, prologueComplete: false,
   level1Checkpoint: 0, level1Killed: [], level1Complete: false, level1IntroPage: 0, level1IntroRead: false,
   level2Checkpoint: 0, level2Killed: [], level2Complete: false,
@@ -12,6 +13,7 @@ export function sanitizeSave(value) {
   const number = (n) => Number.isSafeInteger(n) && n >= 0 ? n : 0;
   return {
     version: 1,
+    difficulty: difficultyKey(value.difficulty),
     highScore: number(value.highScore),
     levelReached: number(value.levelReached),
     muted: value.muted === true,
