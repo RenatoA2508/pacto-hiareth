@@ -1,0 +1,16 @@
+{
+  "name": "pacto-hiraeth",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "El pacto de Hiareth — plataformas 2D con Phaser.js",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test"
+  },
+  "dependencies": { "phaser": "3.90.0" },
+  "devDependencies": { "vite": "6.4.6" },
+  "engines": { "node": ">=22.12.0" }
+}

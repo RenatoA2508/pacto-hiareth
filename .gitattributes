@@ -1,0 +1,5 @@
+# Preservar byte a byte las fuentes entregadas y las licencias de terceros.
+docs/source/** -text -whitespace
+public/assets/**/License.txt -text -whitespace
+*.png binary
+*.docx binary
