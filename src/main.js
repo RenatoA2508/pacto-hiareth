@@ -8,6 +8,8 @@ import { MenuScene } from './scenes/MenuScene.js';
 import { PlaygroundScene } from './scenes/PlaygroundScene.js';
 import { PauseScene } from './scenes/PauseScene.js';
 import { ResultScene } from './scenes/ResultScene.js';
+import { StoryScene } from './scenes/StoryScene.js';
+import { CombatScene } from './scenes/CombatScene.js';
 
 let browserStorage;
 try { browserStorage = window.localStorage; } catch { /* Modo privado o política del navegador. */ }
@@ -22,7 +24,7 @@ const game = new Phaser.Game({
   pixelArt: true,
   scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
   physics: { default: 'arcade', arcade: { gravity: { x: 0, y: GAME.gravity }, debug: false } },
-  scene: [BootScene, MenuScene, PlaygroundScene, PauseScene, ResultScene],
+  scene: [BootScene, MenuScene, PlaygroundScene, PauseScene, ResultScene, StoryScene, CombatScene],
   callbacks: {
     preBoot(instance) { instance.registry.set('storage', storage); instance.registry.set('ui', ui); },
     postBoot(instance) { instance.sound.mute = storage.data.muted; },
@@ -33,5 +35,7 @@ ui.on('mute', () => {
   storage.update({ muted: !storage.data.muted });
   game.sound.mute = storage.data.muted;
   ui.updateMute();
+  if (!ui.hud.hidden) ui.focusGame();
 });
-if (import.meta.hot) import.meta.hot.dispose(() => { ui.destroy(); game.destroy(true); });
+ui.on('ui-confirm', () => game.registry.get('audio')?.play('click'));
+if (import.meta.hot) import.meta.hot.dispose(() => { game.registry.get('audio')?.destroy(); ui.destroy(); game.destroy(true); });

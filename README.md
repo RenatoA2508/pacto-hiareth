@@ -21,13 +21,17 @@ npm run preview  # Revisa la compilación local
 
 El `base` relativo permite alojar `dist/` en un subdirectorio. No se ha configurado publicación automática.
 
-## Primer incremento
+## Versión de desarrollo 0.2
 
 Hay un **laboratorio de movimiento independiente de la historia**. Incluye el sprite aprobado de Aidan, caminar, salto simple, gravedad y colisiones Arcade Physics, cámara lateral, checkpoint, caída, reintento, llegada, menú y pausa. La llegada solo completa la prueba técnica.
 
 El guardado conserva checkpoint del laboratorio y silencio. Los campos `highScore` y `levelReached` están preparados, pero permanecen en cero: todavía no hay reglas aprobadas de puntuación ni niveles narrativos implementados. Si el navegador bloquea el guardado, se conserva el estado en memoria durante la sesión.
 
-**No es el juego terminado.** Quedan pendientes combate, enemigos integrados, niveles narrativos, decisiones frente al slime, vida, puntuación, música y efectos. El botón de silencio ya cambia la preferencia y el gestor de sonido de Phaser; este incremento todavía no reproduce audio.
+El menú también ofrece **Entrenamiento de combate**: J o Atacar ejecutan el ataque cercano real de Aidan, con tres puntos de vida. Tres objetivos geométricos caminan, persiguen, dañan por contacto y ejecutan un ataque corto. Hay anticipación, ventanas de daño, invulnerabilidad, bloqueo de ataques a través de paredes, reacción, muerte, derrota y repetición. No son slimes ni enemigos definitivos de la historia.
+
+**Leer prólogo** presenta 28 párrafos literales de la introducción del Word, con avance, retroceso y guardado automático del punto de lectura. Flechas izquierda/derecha cambian de párrafo y Escape vuelve al menú. No se han añadido diálogos ni un final.
+
+**No es el juego terminado.** Quedan pendientes los niveles narrativos, slimes definitivos, decisiones frente al slime, puntuación y música. Ya se reproducen cinco efectos CC0 de Kenney para interfaz, pasos, aterrizaje y golpes. OGG incluye fallback MP3; el botón de silencio está disponible en la cabecera incluso fuera del juego.
 
 ## Controles provisionales aprobados
 
@@ -35,6 +39,7 @@ El guardado conserva checkpoint del laboratorio y silencio. Los campos `highScor
 | --- | --- | --- |
 | Caminar | A/D o ←/→ | Mantener ←/→ |
 | Saltar | Espacio | Botón Saltar |
+| Ataque cercano en entrenamiento, desde suelo | J | Botón Atacar |
 | Pausar y reanudar | Escape | Pausa / Continuar |
 | Silencio | Botón del HUD | Botón del HUD |
 
@@ -92,3 +97,9 @@ El Boss Fight permanece bloqueado hasta que el equipo complete y apruebe la hist
 ## Créditos
 
 Aidan utiliza [Evil Wizard 2 de LuizMelo](https://luizmelo.itch.io/evil-wizard-2), con licencia CC0 verificada en la página y en `License.txt` del paquete. Se usan únicamente Idle, Run, Jump y Fall sin modificar los PNG. La geometría del laboratorio es código de prueba, no arte definitivo. No se incluyen recursos de CraftPix ni audio extraído de YouTube.
+
+El entrenamiento añade Attack1, Take hit y Death del mismo paquete sin modificar. Audio: Kenney, Interface Sounds e Impact Sounds, CC0. Consulta el catálogo de audio para los cinco archivos usados y sus licencias. Los ZIP recibidos de CraftPix están en auditoría; no se incluyen sus paquetes fuente en Git.
+
+## Paquetes locales
+
+`npm run package` compila y crea dos ZIP verificados en `release/`: web estática y código fuente con `dist/` incluido. El paquete incluye `EJECUTAR.txt`. No contiene `node_modules`, `.git`, credenciales ni originales descargados. Son paquetes de desarrollo, no una entrega académica completa. Se necesita Python 3 para extracción/verificación del prólogo y para empaquetar.

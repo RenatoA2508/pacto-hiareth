@@ -10,5 +10,8 @@ export const PLAYER_ART = Object.freeze({
     { key: 'run', file: 'Run.png', frames: 8, fps: 12 },
     { key: 'jump', file: 'Jump.png', frames: 2, fps: 8 },
     { key: 'fall', file: 'Fall.png', frames: 2, fps: 8 },
+    { key: 'attack', file: 'Attack1.png', frames: 8, fps: 12, repeat: 0 },
+    { key: 'hurt', file: 'Take hit.png', frames: 3, fps: 12, repeat: 0 },
+    { key: 'death', file: 'Death.png', frames: 7, fps: 10, repeat: 0 },
   ],
 });

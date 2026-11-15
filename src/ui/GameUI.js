@@ -5,6 +5,7 @@ export class GameUI extends EventTarget {
     this.held = new Set();
     this.pointers = new Map();
     this.jumpPending = false;
+    this.attackPending = false;
     this.abort = new AbortController();
     this.panels = document.querySelector('#panels');
     this.hud = document.querySelector('#hud');
@@ -49,11 +50,13 @@ export class GameUI extends EventTarget {
   }
   press(control) {
     if (control === 'jump' && !this.held.has(control)) this.jumpPending = true;
+    if (control === 'attack' && !this.held.has(control)) this.attackPending = true;
     this.held.add(control);
   }
   consumeJump() { const pending = this.jumpPending; this.jumpPending = false; return pending; }
+  consumeAttack() { const pending = this.attackPending; this.attackPending = false; return pending; }
   clearInput() {
-    this.held.clear(); this.pointers.clear(); this.jumpPending = false;
+    this.held.clear(); this.pointers.clear(); this.jumpPending = false; this.attackPending = false;
     this.touchControls.querySelectorAll('button').forEach((button) => button.classList.remove('held'));
   }
   announce(text) { document.querySelector('#announcement').textContent = text; }
@@ -65,6 +68,18 @@ export class GameUI extends EventTarget {
   }
   checkpoint(active) {
     document.querySelector('#checkpoint-label').textContent = active ? 'Checkpoint guardado' : 'Punto de partida';
+  }
+  mode(combat) {
+    document.querySelector('#attack-button').hidden = !combat;
+    document.querySelector('#combat-health').hidden = !combat;
+    document.querySelector('#combat-help').hidden = !combat;
+    document.querySelector('#game').setAttribute('aria-label', `Escena de plataformas. A y D o flechas para caminar; Espacio para saltar; ${combat ? 'J para atacar en suelo; ' : ''}Escape para pausar.`);
+    document.querySelector('#hud-title').textContent = combat ? 'ENTRENAMIENTO DE COMBATE' : 'PRUEBA DE MOVIMIENTO';
+    document.querySelector('#mode-label').textContent = combat ? 'J · ATAQUE EN SUELO' : 'PRUEBA TÉCNICA / SIN COMBATE';
+  }
+  combatStats(health, defeated, total, maxHealth) {
+    document.querySelector('#combat-health').textContent = `Vida ${health}/${maxHealth} · Objetivos ${defeated}/${total}`;
+    document.querySelector('#checkpoint-label').textContent = 'Acércate y ataca con J';
   }
   gameplay(active) {
     this.hud.hidden = !active;
@@ -90,7 +105,9 @@ export class GameUI extends EventTarget {
       if (secondary) button.className = 'secondary';
       const text = document.createElement('span'); text.textContent = label;
       const arrow = document.createElement('span'); arrow.textContent = '→'; arrow.setAttribute('aria-hidden', 'true');
-      button.append(text, arrow); button.addEventListener('click', run); buttons.append(button);
+      button.append(text, arrow);
+      button.addEventListener('click', () => { this.emit('ui-confirm'); run(); });
+      buttons.append(button);
     });
     const small = document.createElement('p'); small.className = 'small-note'; small.textContent = note ?? '';
     panel.append(top, heading, copy, buttons, small);

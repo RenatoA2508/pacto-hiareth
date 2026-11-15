@@ -12,7 +12,7 @@ export class PlaygroundScene extends Phaser.Scene {
     this.storage = this.registry.get('storage');
     this.ending = false;
     this.checkpointActive = resume && this.storage.data.playgroundCheckpoint;
-    this.ui.hidePanel(); this.ui.gameplay(true); this.ui.checkpoint(this.checkpointActive); this.ui.focusGame();
+    this.ui.hidePanel(); this.ui.mode(false); this.ui.gameplay(true); this.ui.checkpoint(this.checkpointActive); this.ui.focusGame();
     drawLaboratory(this, PLAYGROUND.width);
     this.physics.world.setBounds(0, 0, PLAYGROUND.width, PLAYGROUND.height);
     this.cameras.main.setBounds(0, 0, PLAYGROUND.width, GAME.height);
@@ -69,6 +69,7 @@ export class PlaygroundScene extends Phaser.Scene {
   pausePlay() {
     if (this.ending || !this.scene.isActive()) return;
     this.controls.reset();
+    this.registry.get('audio')?.play('back');
     this.scene.launch('Pause');
     this.scene.pause();
   }
@@ -94,6 +95,7 @@ export class PlaygroundScene extends Phaser.Scene {
       this.checkpointActive = true;
       this.storage.update({ playgroundCheckpoint: true });
       this.checkpointMarker.setFillStyle(0xe0c78f);
+      this.registry.get('audio')?.play('confirm');
       this.ui.checkpoint(true);
       this.ui.announce(this.storage.available ? 'Checkpoint guardado.' : 'Checkpoint activo en esta sesión. El navegador no permite guardar.');
     }

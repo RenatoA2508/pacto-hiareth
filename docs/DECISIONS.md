@@ -26,4 +26,18 @@
 - No inventar historia, diálogos, actos, enemigos ni consecuencias de la elección del slime.
 - Enemigos comunes: caminar, perseguir, contacto y ataque básico ya están confirmados en §17–18 de la fuente. Falta inspeccionar recursos y aprobar tipos de ataque y balance antes de integrarlos.
 - La música tiene referencias asignadas; faltan archivos y permisos.
-- Los fondos de CraftPix y slimes siguen pendientes de descarga mediante una sesión autorizada.
+- Los originales de fondos y slimes ya se recibieron; su integración depende de la auditoría y del ataque aprobado para el slime.
+
+## 2026-11-15 — Segundo incremento
+
+**APROBADO para probar y ajustar por el usuario:** ataque cercano de Aidan con J y botón táctil, 3 puntos de vida e invulnerabilidad breve. Balance centralizado en `src/config/combat.js`; los objetivos geométricos del entrenamiento no representan enemigos canónicos. No hay proyectiles ni jefe.
+
+**IMPLEMENTADO:** entrenamiento con tres objetivos, detección/persecución terrestre, contacto, ataque cercano, reacción, muerte, derrota y repetición. El cooldown de daño del jugador evita duplicar daño por contacto y ataque. Las hitboxes solo dañan en su ventana activa y respetan paredes.
+
+**IMPLEMENTADO Y VERIFICADO:** prólogo de 28 párrafos extraídos literalmente del Word, lectura anterior/siguiente y recuperación tras recargar. El hash de la fuente y la extracción se comprueban automáticamente.
+
+**AUDIO:** cinco efectos CC0 de Kenney, originales OGG y copias MP3 para compatibilidad. Sonido de interfaz, confirmación, pausa, pasos y aterrizaje; silencio disponible también en el menú y guardado entre sesiones. La música sigue pendiente.
+
+**PROBADO EN NAVEGADOR:** recorrido completo de entrenamiento con los tres objetivos derrotados, pausa/reanudación, derrota y repetición, y continuidad de la lectura del prólogo. No se considera validado el rendimiento en dispositivos físicos.
+
+**RECURSOS RECIBIDOS:** los ZIP oficiales de naturaleza y slimes se encontraron en Descargas y se archivaron localmente. La inspección confirma cuatro filas direccionales, incluidas izquierda/derecha, en los slimes. Está pendiente confirmar el uso de su animación de ataque de corto alcance para el primer nivel.

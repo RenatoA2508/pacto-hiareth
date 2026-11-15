@@ -47,3 +47,14 @@ test('permite jugar en memoria si localStorage está bloqueado o lleno', () => {
   assert.doesNotThrow(() => absent.update({ muted: true }));
   assert.equal(absent.available, false);
 });
+
+test('guarda la lectura sin perder el checkpoint de una partida anterior', () => {
+  const disk = memoryStorage(JSON.stringify({ version: 1, playgroundCheckpoint: true, muted: true }));
+  const store = new StorageManager(disk);
+  store.update({ prologuePage: 12, prologueComplete: true });
+  const loaded = new StorageManager(disk);
+  assert.equal(loaded.data.prologuePage, 12);
+  assert.equal(loaded.data.prologueComplete, true);
+  assert.equal(loaded.data.playgroundCheckpoint, true);
+  assert.equal(loaded.data.muted, true);
+});

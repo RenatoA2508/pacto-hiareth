@@ -2,12 +2,12 @@ import Phaser from 'phaser';
 
 export class PauseScene extends Phaser.Scene {
   constructor() { super('Pause'); }
-  create() {
+  create({ sceneKey = 'Playground' } = {}) {
     const ui = this.registry.get('ui');
     ui.gameplay(false);
     const resume = () => {
       ui.hidePanel(); ui.gameplay(true); ui.focusGame();
-      this.scene.resume('Playground'); this.scene.stop();
+      this.scene.resume(sceneKey); this.scene.stop();
     };
     const escape = (event) => { if (event.code === 'Escape') { event.preventDefault(); resume(); } };
     window.addEventListener('keydown', escape);
@@ -19,7 +19,7 @@ export class PauseScene extends Phaser.Scene {
       actions: [
         { label: 'Continuar', run: resume },
         { label: 'Volver al menú', secondary: true, run: () => {
-          this.scene.stop('Playground'); this.scene.start('Menu');
+          this.scene.stop(sceneKey); this.scene.start('Menu');
         } },
       ],
     });

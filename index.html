@@ -12,7 +12,7 @@
     <main class="app">
       <header class="masthead">
         <a class="brand" href="./" aria-label="El pacto de Hiareth, inicio"><span class="brand-mark" aria-hidden="true">✧</span> EL PACTO DE HIARETH</a>
-        <span class="edition">DESARROLLO <span class="dot"></span> 0.1</span>
+        <div class="header-tools"><button id="mute" type="button" aria-pressed="false">Silencio: no</button><span class="edition">DESARROLLO <span class="dot"></span> 0.2</span></div>
       </header>
 
       <section class="game-shell" aria-label="Juego de plataformas">
@@ -22,24 +22,25 @@
           <div id="fatal-error" class="fatal-error" role="alert" hidden></div>
           <div id="panels" class="panels"></div>
           <div id="hud" class="hud" hidden>
-            <div class="hud-location"><span class="eyebrow">PRUEBA DE MOVIMIENTO</span><strong id="checkpoint-label">Punto de partida</strong></div>
-            <div class="hud-actions"><button id="mute" type="button" aria-pressed="false">Audio: sí</button><button id="pause" type="button">Pausa <span aria-hidden="true">Ⅱ</span></button></div>
+            <div class="hud-location"><span id="hud-title" class="eyebrow">PRUEBA DE MOVIMIENTO</span><strong id="checkpoint-label">Punto de partida</strong><span id="combat-health" hidden></span></div>
+            <div class="hud-actions"><button id="pause" type="button">Pausa <span aria-hidden="true">Ⅱ</span></button></div>
           </div>
         </div>
 
         <div id="touch-controls" class="touch-controls" aria-label="Controles de movimiento" hidden>
           <div class="direction-controls"><button type="button" data-control="left" aria-label="Caminar a la izquierda">←</button><button type="button" data-control="right" aria-label="Caminar a la derecha">→</button></div>
-          <p>PRUEBA TÉCNICA <span aria-hidden="true">/</span> SIN COMBATE</p>
-          <button type="button" data-control="jump" aria-label="Saltar">Saltar <span aria-hidden="true">↑</span></button>
+          <p id="mode-label">PRUEBA TÉCNICA <span aria-hidden="true">/</span> SIN COMBATE</p>
+          <div class="action-controls"><button id="attack-button" type="button" data-control="attack" aria-label="Atacar" hidden>Atacar <span aria-hidden="true">J</span></button><button type="button" data-control="jump" aria-label="Saltar">Saltar <span aria-hidden="true">↑</span></button></div>
         </div>
         <div class="stage-caption"><span><i aria-hidden="true"></i> Prototipo jugable · movimiento y físicas</span><span>PHASER.JS / JAVASCRIPT</span></div>
       </section>
 
       <section class="understage" aria-label="Información de la prueba">
         <div><h2>Antes de cruzar el primer portal.</h2><p>Una prueba de movimiento, fuera de la historia. Recorre las plataformas y alcanza la marca de llegada.</p></div>
-        <div id="controls-help" class="controls-help"><span><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd> Caminar</span><span><kbd>Espacio</kbd> Saltar</span><span><kbd>Esc</kbd> Pausa</span></div>
+        <div id="controls-help" class="controls-help"><span><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd> Caminar</span><span><kbd>Espacio</kbd> Saltar</span><span id="combat-help" hidden><kbd>J</kbd> Atacar</span><span><kbd>Esc</kbd> Pausa</span></div>
       </section>
-      <footer class="footer"><span>Aplicaciones Web · Proyecto de plataformas 2D</span><span>Personaje: LuizMelo · CC0</span></footer>
+      <footer class="footer"><span>Aplicaciones Web · Proyecto de plataformas 2D</span><span>Arte: LuizMelo · Audio: Kenney · CC0</span></footer>
+      <p id="audio-notice" class="status-notice" role="status" hidden></p>
       <p id="announcement" class="sr-only" aria-live="polite"></p>
     </main>
     <script type="module" src="/src/main.js"></script>

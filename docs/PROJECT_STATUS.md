@@ -1,5 +1,7 @@
 # Comprensión y estado del proyecto
 
+Actualización del segundo incremento: controles validados por el usuario; entrenamiento completo con combate cercano, 3 vidas, objetivos con IA común, derrota y repetición; prólogo literal con guardado de lectura; cinco efectos CC0 con mute. Los dos ZIP gráficos del nivel 1 se recibieron y están en auditoría. Aún no hay un nivel narrativo completo ni música autorizada. Ver `DECISIONS.md` y `VALIDATION.md` para las aprobaciones y pruebas posteriores al primer incremento.
+
 ## Qué se está construyendo
 
 Un plataformas lateral 2D de fantasía con Phaser.js y JavaScript para Aplicaciones Web. Aidan atraviesa los lugares descritos en la historia del Pacto de Hiareth y conoce a Aine. La narrativa es la fuente de verdad y no se completan sus vacíos con contenido inventado. La prueba actual es infraestructura para desarrollar el juego por incrementos que los estudiantes puedan comprender y defender.
@@ -43,7 +45,7 @@ Resueltos en esta sesión: nombre **Aidan** y esquema provisional de caminar/sal
 5. **Tercer nivel y cierre:** esperar escritura y aprobación. El jefe requiere desbloqueo explícito adicional.
 6. **Audio y entrega:** música autorizada, al menos dos efectos con licencias, pruebas en móvil y escritorio con objetivo de 45 FPS, capturas, video, ZIP y autoevaluación.
 
-## Matriz académica actual
+## Matriz del primer incremento conservada como referencia
 
 | Requisito | Estado |
 | --- | --- |

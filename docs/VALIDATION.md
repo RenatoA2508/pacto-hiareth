@@ -35,3 +35,9 @@ El modo `/?debug` solo está disponible en desarrollo y actualiza su medidor una
 **Pendiente de prueba manual completa:** recorrido hasta checkpoint y llegada, caída y reintento repetidos, persistencia integrada tras recargar el navegador, Escape para reanudar, botón de silencio tras recarga y multitouch real de caminar más saltar. La persistencia sí tiene pruebas automatizadas aisladas; eso no sustituye verificar todo el flujo del juego en un navegador.
 
 No se probaron sistemas que todavía no existen: combate, IA integrada, música, puntuación o niveles narrativos. El Boss Fight continúa bloqueado.
+
+## Segundo incremento — entrenamiento, lectura y audio
+
+Comprobado en navegador: prólogo avanza a 5/28 y vuelve a ese mismo párrafo tras recargar; menú de lectura y retorno funcionan. Entrenamiento: derrota por vida a cero, reintento con 3/3, eliminación del primer y segundo objetivo con vida 3/3, salto del obstáculo y pantalla de entrenamiento completado al eliminar el tercero. Pausa/reanudación no reinicia la prueba. No se observaron errores de consola en ese recorrido.
+
+Se añaden ocho casos automatizados de combate (ventanas, cooldown, interrupción, invulnerabilidad compartida, muerte terminal, detección, orientación y paredes), tres de recursos (hojas, formatos de sonido, origen del prólogo), un quinto caso de persistencia de lectura y tres de audio (mute, autoplay y limpieza). `scripts/extract-story.py --check` comprueba los 28 párrafos completos contra el Word, sin reescribirlo. La evaluación auditiva, multitouch físico y mediciones sostenidas de FPS siguen pendientes.

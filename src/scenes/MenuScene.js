@@ -21,8 +21,10 @@ export class MenuScene extends Phaser.Scene {
       storage.update({ playgroundCheckpoint: false });
       this.scene.start('Playground', { resume: false });
     } });
+    actions.push({ label: storage.data.prologuePage ? 'Continuar prólogo' : 'Leer prólogo', secondary: true, run: () => this.scene.start('Story') });
+    actions.push({ label: 'Entrenamiento de combate', secondary: true, run: () => this.scene.start('Combat') });
     ui.panel({
-      eyebrow: 'PLATAFORMAS 2D · PRIMER INCREMENTO',
+      eyebrow: 'PLATAFORMAS 2D · EN DESARROLLO',
       title: 'El pacto<br>de <em>Hiareth</em>',
       description: 'Camina, salta y encuentra tu ritmo. Prueba el movimiento de Aidan antes de comenzar su historia.',
       note: storage.available ? 'Escenario de prueba · sin contenido narrativo' : 'Guardado no disponible · puedes jugar en esta sesión',
