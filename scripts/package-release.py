@@ -10,7 +10,8 @@ OUT.mkdir(exist_ok=True)
 assert (ROOT / 'dist/index.html').is_file(), 'Ejecutar npm run build primero'
 instructions = '''El pacto de Hiareth — incremento de desarrollo
 
-Esta versión incluye laboratorio de movimiento, entrenamiento de combate y prólogo.
+Esta versión incluye el primer nivel con slimes, checkpoint, contador de bajas,
+introducción, prólogo, laboratorio de movimiento y entrenamiento de combate.
 Los niveles narrativos y el juego completo todavía están pendientes.
 
 Web compilada: desde esta carpeta ejecutar python3 -m http.server 8080

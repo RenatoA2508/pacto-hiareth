@@ -1,5 +1,5 @@
 const KEY = 'pacto-hiraeth:v1';
-const defaults = () => ({ version: 1, highScore: 0, levelReached: 0, muted: false, playgroundCheckpoint: false, prologuePage: 0, prologueComplete: false });
+const defaults = () => ({ version: 1, highScore: 0, levelReached: 0, muted: false, playgroundCheckpoint: false, prologuePage: 0, prologueComplete: false, level1Checkpoint: 0, level1Killed: [], level1Complete: false, level1IntroPage: 0, level1IntroRead: false });
 
 export function sanitizeSave(value) {
   if (!value || typeof value !== 'object' || value.version !== 1) return defaults();
@@ -12,6 +12,11 @@ export function sanitizeSave(value) {
     playgroundCheckpoint: value.playgroundCheckpoint === true,
     prologuePage: number(value.prologuePage),
     prologueComplete: value.prologueComplete === true,
+    level1Checkpoint: Math.min(number(value.level1Checkpoint), 2),
+    level1Killed: Array.isArray(value.level1Killed) ? [...new Set(value.level1Killed.filter((id) => Number.isSafeInteger(id) && id >= 0 && id < 6))] : [],
+    level1Complete: value.level1Complete === true,
+    level1IntroPage: number(value.level1IntroPage),
+    level1IntroRead: value.level1IntroRead === true,
   };
 }
 
@@ -24,6 +29,7 @@ export class StorageManager {
     } catch {
       // Una partida corrupta o el almacenamiento bloqueado no impiden jugar.
       this.data = defaults();
+      this.available = false;
     }
   }
 

@@ -41,3 +41,11 @@ No se probaron sistemas que todavía no existen: combate, IA integrada, música,
 Comprobado en navegador: prólogo avanza a 5/28 y vuelve a ese mismo párrafo tras recargar; menú de lectura y retorno funcionan. Entrenamiento: derrota por vida a cero, reintento con 3/3, eliminación del primer y segundo objetivo con vida 3/3, salto del obstáculo y pantalla de entrenamiento completado al eliminar el tercero. Pausa/reanudación no reinicia la prueba. No se observaron errores de consola en ese recorrido.
 
 Se añaden ocho casos automatizados de combate (ventanas, cooldown, interrupción, invulnerabilidad compartida, muerte terminal, detección, orientación y paredes), tres de recursos (hojas, formatos de sonido, origen del prólogo), un quinto caso de persistencia de lectura y tres de audio (mute, autoplay y limpieza). `scripts/extract-story.py --check` comprueba los 28 párrafos completos contra el Word, sin reescribirlo. La evaluación auditiva, multitouch físico y mediciones sostenidas de FPS siguen pendientes.
+
+## Tercer incremento — primer nivel real
+
+Verificado en navegador: introducción de 34 párrafos fuente, entrada al bosque con sprites reales, ruta completa sin atacar, checkpoint 1/2 y 2/2 con vida 3/3 y contador cero, recuperación del segundo checkpoint tras recarga, salto final con daño y llegada al portal con cero bajas. Un intento fallido al final permitió verificar caída y reintento desde el checkpoint.
+
+Ruta de combate: repetir nivel limpia el contador; ataque cercano derrota el primer slime y registra una sola baja con vida 3/3. Recargar conserva esa baja y el silencio activado, sin reaparecer el enemigo ya derrotado. No se observaron errores de consola en las comprobaciones.
+
+Se corrigieron dos plataformas que excedían la altura máxima del salto aprobado y se añadió una prueba de geometría. Cuatro pruebas nuevas verifican progreso sin bajas, IDs de bajas únicos, reinicio y checkpoints válidos; otra verifica las dimensiones reales de las hojas de slime y capas de naturaleza. La extracción del texto compara los 34 párrafos adicionales con el Word. Durante tramos medidos se observaron 58–59 FPS en la vista previa; todavía no se certifican 45 FPS sostenidos en equipos físicos.

@@ -30,3 +30,15 @@ if '--check' in sys.argv:
 else:
     TARGET.write_text(content)
     print('Prólogo extraído sin cambios en la fuente.')
+
+intro = { 'title': 'ACTO 1 · TIERRA, MAR Y CIELO', 'source': SOURCE.name,
+          'sourceSha256': data['sourceSha256'],
+          'paragraphs': [{'sourceIndex': i, 'text': paragraphs[i]} for i in range(64, 98)] }
+intro_target = ROOT / 'src/data/level1-intro.json'
+intro_content = json.dumps(intro, ensure_ascii=False, indent=2) + '\n'
+if '--check' in sys.argv:
+    assert intro_target.read_text() == intro_content, 'La introducción del nivel difiere del Word'
+    print('Introducción nivel 1 verificada: 34 párrafos literales.')
+else:
+    intro_target.write_text(intro_content)
+    print('Introducción nivel 1 extraída sin cambios en la fuente.')

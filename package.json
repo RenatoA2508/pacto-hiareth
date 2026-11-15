@@ -1,6 +1,6 @@
 {
   "name": "pacto-hiraeth",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "description": "El pacto de Hiareth — plataformas 2D con Phaser.js",

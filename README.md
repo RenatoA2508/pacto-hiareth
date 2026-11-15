@@ -1,105 +1,89 @@
 # El pacto de Hiareth
 
-Plataformas 2D con **Phaser 3.90.0 y JavaScript**, preparado con Vite. El protagonista es Aidan, un mago de fuego. La historia fuente tiene prioridad sobre cualquier propuesta de implementación.
+Plataformas lateral 2D con **Phaser 3.90.0, JavaScript y Vite**. Aidan atraviesa el primer bosque del relato. El texto original tiene prioridad y se conserva en `docs/source/`.
 
 ## Ejecutar
 
-Requiere Node.js 22.12 o posterior y npm.
+Requiere Node.js 22.12 o posterior, npm y Python 3 para las comprobaciones de narrativa y los ZIP.
 
 ```sh
 npm ci
 npm run dev
 ```
 
-Abre la dirección local que imprime Vite (normalmente `http://127.0.0.1:5173`). Para detenerlo, usa Ctrl+C en la terminal. No abrir `index.html` directamente: se necesitan el servidor y los módulos de JavaScript.
+Abre la dirección local que imprime Vite, normalmente `http://127.0.0.1:5173`. No abrir `index.html` con file://. Ctrl+C detiene el servidor.
 
 ```sh
-npm test          # Guardado y recuperación de partidas
-npm run build    # Genera dist/ para alojamiento estático
-npm run preview  # Revisa la compilación local
+npm test          # Persistencia, daño, IA, recursos, audio y fidelidad narrativa
+npm run build    # Compilación estática en dist/
+npm run preview  # Revisar la compilación
+npm run package  # Generar ZIP de web y fuente en release/
 ```
 
-El `base` relativo permite alojar `dist/` en un subdirectorio. No se ha configurado publicación automática.
+## Contenido de la versión 0.3
 
-## Versión de desarrollo 0.2
+- **Nivel 1 — Tierra, mar y cielo:** fondo de naturaleza por capas, seis slimes con vistas laterales reales, plataformas, tres huecos, dos checkpoints y portal. Es posible terminar sin derrotar slimes; la ruta con cero bajas fue comprobada en navegador.
+- **Combate cercano:** J y botón táctil, animaciones reales, tres puntos de vida, invulnerabilidad breve, anticipación del ataque enemigo, ventanas activas y bloqueo de daño a través de paredes. No hay proyectiles.
+- **Contador separado:** cada slime derrotado se registra una sola vez. Las bajas no otorgan puntos ni seleccionan una rama narrativa. Al reintentar desde checkpoint se conserva el registro de bajas del viaje; Nuevo viaje o Repetir nivel limpia ese registro.
+- **Narrativa:** prólogo de 28 párrafos e introducción al primer nivel de 34 párrafos, extraídos literalmente del Word. La introducción puede leerse o saltarse con Ir al nivel. Guardado del punto de lectura.
+- **Prácticas:** laboratorio de movimiento y entrenamiento con tres objetivos geométricos independientes de la historia.
+- **Audio:** cinco efectos CC0 de Kenney, OGG con fallback MP3; silencio persistente disponible en la cabecera. No hay música integrada.
+- **Estados:** menú, pausa, caída, derrota por vida, reintento y llegada al portal. El portal cierra el primer recorrido, no la historia completa.
 
-Hay un **laboratorio de movimiento independiente de la historia**. Incluye el sprite aprobado de Aidan, caminar, salto simple, gravedad y colisiones Arcade Physics, cámara lateral, checkpoint, caída, reintento, llegada, menú y pausa. La llegada solo completa la prueba técnica.
+**Todavía no es la entrega académica completa.** Faltan los niveles posteriores, sprite de Aine, música autorizada, criterio de puntuación, texto de los actos pendientes y entregables finales. El Boss Fight continúa bloqueado. `highScore` permanece en cero hasta aprobar el puntaje; `levelReached` registra el nivel 1 al iniciarlo.
 
-El guardado conserva checkpoint del laboratorio y silencio. Los campos `highScore` y `levelReached` están preparados, pero permanecen en cero: todavía no hay reglas aprobadas de puntuación ni niveles narrativos implementados. Si el navegador bloquea el guardado, se conserva el estado en memoria durante la sesión.
+## Controles
 
-El menú también ofrece **Entrenamiento de combate**: J o Atacar ejecutan el ataque cercano real de Aidan, con tres puntos de vida. Tres objetivos geométricos caminan, persiguen, dañan por contacto y ejecutan un ataque corto. Hay anticipación, ventanas de daño, invulnerabilidad, bloqueo de ataques a través de paredes, reacción, muerte, derrota y repetición. No son slimes ni enemigos definitivos de la historia.
-
-**Leer prólogo** presenta 28 párrafos literales de la introducción del Word, con avance, retroceso y guardado automático del punto de lectura. Flechas izquierda/derecha cambian de párrafo y Escape vuelve al menú. No se han añadido diálogos ni un final.
-
-**No es el juego terminado.** Quedan pendientes los niveles narrativos, slimes definitivos, decisiones frente al slime, puntuación y música. Ya se reproducen cinco efectos CC0 de Kenney para interfaz, pasos, aterrizaje y golpes. OGG incluye fallback MP3; el botón de silencio está disponible en la cabecera incluso fuera del juego.
-
-## Controles provisionales aprobados
-
-| Acción | Teclado | Pantalla táctil |
+| Acción | Teclado | Táctil |
 | --- | --- | --- |
 | Caminar | A/D o ←/→ | Mantener ←/→ |
-| Saltar | Espacio | Botón Saltar |
-| Ataque cercano en entrenamiento, desde suelo | J | Botón Atacar |
-| Pausar y reanudar | Escape | Pausa / Continuar |
-| Silencio | Botón del HUD | Botón del HUD |
+| Saltar | Espacio | Saltar |
+| Ataque cercano desde suelo | J | Atacar |
+| Pausa / reanudar | Escape | Pausa / Continuar |
+| Silencio | Botón de cabecera | Botón de cabecera |
+| Leer historia | ←/→, botones; Escape sale | Anterior / Siguiente |
 
-Haz clic en el escenario si el teclado perdió el foco. Los botones de interfaz funcionan también con Tab y Enter. El salto requiere tocar el suelo; mantener Espacio no produce saltos repetidos. La prueba se pausa cuando la ventana pierde el foco o se oculta. En móvil, los botones permiten mantener caminar y pulsar salto simultáneamente; falta validar esta combinación en un teléfono físico.
+Haz clic en el escenario si el teclado perdió el foco. Tab y Enter sirven para los botones. Mantener Espacio o J no repite automáticamente la acción. La pausa se activa también al ocultar la ventana o perder su foco. Falta validar multitouch en teléfono físico.
 
-En desarrollo, `/?debug` muestra FPS, posición y contacto con el suelo para ayudar a revisar las físicas. No existe ese panel en la compilación de producción.
+## Guardado
 
-## Organización y recorrido del código
+La clave `pacto-hiraeth:v1` conserva silencio, nivel alcanzado, checkpoint y bajas únicas del primer nivel, resultado del nivel y posición de lectura. Un viaje nuevo reinicia su recorrido y sus bajas; el nivel máximo alcanzado se conserva. El laboratorio tiene un checkpoint independiente. Datos corruptos o almacenamiento bloqueado no impiden jugar; en ese caso se usa memoria de la sesión.
+
+## Código y comprensión técnica
 
 ```text
 src/
-  main.js                  Crea Phaser, configura escenas y conecta gestores
-  config/game.js           Resolución, física, movimiento y hojas de Aidan
-  data/playground.js       Geometría del laboratorio; no es un nivel narrativo
-  entities/Player.js       Cuerpo físico, orientación y animaciones
-  managers/
-    InputController.js     Teclado y botones con una misma salida
-    StorageManager.js      Guardado versionado, validación y recuperación
-  scenes/
-    BootScene.js           Loader y animaciones; informa errores de carga
-    MenuScene.js           Inicio o continuación del laboratorio
-    PlaygroundScene.js     Plataformas, cámara, checkpoint y llegada
-    PauseScene.js          Suspende y reanuda la escena de juego
-    ResultScene.js         Resultado del intento y reintento
-  ui/
-    GameUI.js              Botones HTML, foco y anuncios accesibles
-    drawLaboratory.js      Geometría decorativa de prueba
-public/assets/             Solo recursos usados por el juego
-assets/originals/          Archivos descargados locales, ignorados por Git
-docs/source/              Copias sin modificaciones de las tres fuentes
-tests/                    Casos de persistencia con node:test
+  main.js                  Phaser y conexión de gestores
+  config/                  Movimiento, arte, audio, combate y nivel
+  data/                    Geometría y narrativa extraída
+  entities/                Player, BaseEnemy, SlimeEnemy y PracticeEnemy
+  managers/                Entrada, audio y almacenamiento
+  systems/                 Vida, ataques, IA, colisiones ofensivas y progreso
+  scenes/                  Boot, Menu, Story, Level1, prácticas, Pause y Result
+  ui/                      Interfaz HTML, lectura y dibujo de escenarios
+scripts/                   Extracción literal y empaquetado
+public/assets/             Solo recursos integrados y sus licencias
+assets/originals/           ZIP locales ignorados por Git y fuera del build
+docs/source/               Las tres fuentes sin modificaciones
+tests/                     Pruebas con node:test
 ```
 
-`Boot → Menu → Playground → Result` es el flujo principal. `Pause` se ejecuta por encima de `Playground`, que permanece suspendida. Las escenas retiran sus listeners al cerrarse. La interfaz HTML facilita lectura, navegación por teclado y botones táctiles sin depender del texto dibujado en el canvas.
+`BaseEnemy` comparte física, vida y estados; `SlimeEnemy` aporta el arte y configuración inspeccionados. `EnemyBrain` decide IDLE/CHASE/ATTACK/HURT/DEATH. `CombatSystem` aplica hitboxes activas y un solo golpe por víctima y ataque. `Vitals` comparte invulnerabilidad entre contacto y ataque para impedir daño duplicado. `LevelProgress` guarda bajas y checkpoints sin acoplarlos al puntaje.
 
-El cuerpo físico del jugador mide 30 × 65 antes de escala; su desplazamiento en la hoja es (111, 102). Los cuadros completos miden 250 × 250 y contienen transparencia. Colisionar con todo el cuadro produciría choques lejos del dibujo. Las plataformas físicas se definen por separado del fondo decorativo.
+Los cuadros de Aidan miden 250 × 250, pero su hitbox mide 30 × 65 antes de escala, con offset (111,102). La transparencia no colisiona. Los slimes usan cuadros de 64 × 64 y la cuarta fila lateral del paquete. La gravedad, velocidad y altura de salto están centralizadas. Se usa Canvas, sin shaders. El proyecto se escribió por módulos, sin plantilla de juego descargada.
 
-Velocidad, gravedad y salto están centralizados para ajustar la sensación de movimiento con el equipo. El renderizador de este incremento es Canvas; no usa shaders. No se empleó una plantilla de juego descargada.
+En desarrollo, `/?debug` muestra FPS, posición y suelo en el laboratorio y el nivel 1. No aparece en producción. Las lecturas de FPS de la vista previa no sustituyen medir los dispositivos de entrega.
 
-## Fuentes y decisiones
+## Recursos y documentación
 
-- [Documentación maestra original](docs/source/GAME_MASTER_DOCUMENTATION.md).
-- [Narrativa original](docs/source/el%20pacto%20de%20hiraeth%20%281%29.docx).
-- [Guía académica original](docs/source/ProyectoPrimerBimestre-2026-A.docx).
-- [Comprensión, pendientes y plan](docs/PROJECT_STATUS.md).
-- [Decisiones confirmadas](docs/DECISIONS.md).
-- [Créditos e inventario de recursos](docs/ASSET_CREDITS.md).
-- [Catálogo de audio](docs/AUDIO_ASSET_CATALOG.md).
-- [Verificación de este incremento](docs/VALIDATION.md).
+- [Estado y pendientes](docs/PROJECT_STATUS.md), [decisiones](docs/DECISIONS.md) y [pruebas](docs/VALIDATION.md).
+- [Créditos de arte](docs/ASSET_CREDITS.md) y [catálogo de audio](docs/AUDIO_ASSET_CATALOG.md).
+- [Fuente maestra original](docs/source/GAME_MASTER_DOCUMENTATION.md), narrativa y guía académica en `docs/source/`.
 
-Las fuentes originales conservan errores y decisiones antiguas; `docs/DECISIONS.md` registra aclaraciones posteriores. El usuario confirmó **Aidan** y que «Airan» es un error; ningún diálogo original se modificó. Se conserva el título de trabajo «El pacto de Hiareth» del documento maestro, aunque la carpeta del repositorio se llama `pacto-hiraeth`.
+Aidan: [Evil Wizard 2 de LuizMelo](https://luizmelo.itch.io/evil-wizard-2), CC0. Audio: [Interface Sounds](https://kenney.nl/assets/interface-sounds) e [Impact Sounds](https://kenney.nl/assets/impact-sounds) de Kenney, CC0. Naturaleza y slimes: paquetes Freebie aprobados de CraftPix, con licencia registrada en el inventario. Solo se integraron los PNG usados; los ZIP, PSD, cupones y demostraciones quedan fuera de la distribución. Las plataformas físicas se dibujan por código, separadas del fondo. No se extrajo música de YouTube.
 
-El Boss Fight permanece bloqueado hasta que el equipo complete y apruebe la historia y autorice su implementación. No hay escena, patrones ni ataques de jefe.
+## Paquetes
 
-## Créditos
+`npm run package` crea ZIP de web estática y de fuente con `dist/`, ambos con instrucciones `EJECUTAR.txt`. Se verifican los ZIP y se excluyen `.git`, credenciales, `node_modules` y originales de terceros. El código y los documentos están versionados; los paquetes locales de `release/` no se suben a Git.
 
-Aidan utiliza [Evil Wizard 2 de LuizMelo](https://luizmelo.itch.io/evil-wizard-2), con licencia CC0 verificada en la página y en `License.txt` del paquete. Se usan únicamente Idle, Run, Jump y Fall sin modificar los PNG. La geometría del laboratorio es código de prueba, no arte definitivo. No se incluyen recursos de CraftPix ni audio extraído de YouTube.
-
-El entrenamiento añade Attack1, Take hit y Death del mismo paquete sin modificar. Audio: Kenney, Interface Sounds e Impact Sounds, CC0. Consulta el catálogo de audio para los cinco archivos usados y sus licencias. Los ZIP recibidos de CraftPix están en auditoría; no se incluyen sus paquetes fuente en Git.
-
-## Paquetes locales
-
-`npm run package` compila y crea dos ZIP verificados en `release/`: web estática y código fuente con `dist/` incluido. El paquete incluye `EJECUTAR.txt`. No contiene `node_modules`, `.git`, credenciales ni originales descargados. Son paquetes de desarrollo, no una entrega académica completa. Se necesita Python 3 para extracción/verificación del prólogo y para empaquetar.
+Para servir el paquete web sin instalar Node: `python3 -m http.server 8080` y abrir `http://localhost:8080`. Para el paquete de fuente, también se puede servir su `dist/` con `python3 -m http.server 8080 --directory dist`.

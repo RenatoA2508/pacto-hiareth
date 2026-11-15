@@ -41,3 +41,13 @@
 **PROBADO EN NAVEGADOR:** recorrido completo de entrenamiento con los tres objetivos derrotados, pausa/reanudación, derrota y repetición, y continuidad de la lectura del prólogo. No se considera validado el rendimiento en dispositivos físicos.
 
 **RECURSOS RECIBIDOS:** los ZIP oficiales de naturaleza y slimes se encontraron en Descargas y se archivaron localmente. La inspección confirma cuatro filas direccionales, incluidas izquierda/derecha, en los slimes. Está pendiente confirmar el uso de su animación de ataque de corto alcance para el primer nivel.
+
+## 2026-11-15 — Primer nivel y contador
+
+**APROBADO por el usuario:** usar el ataque cercano de la animación real del slime. Se usa la cuarta fila lateral de Slime1, sin añadir proyectiles ni variantes elementales.
+
+**PREFERENCIA DEL USUARIO:** contador de enemigos derrotados separado del puntaje, para observar si se mató o evitó al enemigo. No se conceden puntos por bajas ni se inventan consecuencias narrativas. El criterio de puntaje académico sigue pendiente.
+
+**IMPLEMENTADO:** primer nivel de 4300 px, ocho capas originales de naturaleza, seis slimes, dos checkpoints y portal. Bajas únicas guardadas por ID del viaje, sin duplicarse al recargar; los enemigos ya derrotados no reaparecen al reintentar. Nuevo viaje limpia el contador.
+
+**PROBADO EN NAVEGADOR:** ruta completa con cero bajas y llegada al portal, checkpoints 1/2 y 2/2, recuperación tras recargar, derrota/reintento, combate que registra una baja sin perder vida y persistencia del contador y silencio. Diagnóstico de la vista previa mostró aproximadamente 58–59 FPS durante tramos del recorrido; falta benchmark físico sostenido.

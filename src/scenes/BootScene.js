@@ -2,6 +2,7 @@ import Phaser from 'phaser';
 import { PLAYER_ART } from '../config/game.js';
 import { SOUND_EFFECTS } from '../config/audio.js';
 import { AudioManager } from '../managers/AudioManager.js';
+import { SLIME_ART, NATURE_LAYERS } from '../config/level1.js';
 
 export class BootScene extends Phaser.Scene {
   constructor() { super('Boot'); }
@@ -19,6 +20,8 @@ export class BootScene extends Phaser.Scene {
       const base = `${import.meta.env.BASE_URL}assets/audio/sfx/`;
       this.load.audio(key, [base + file, base + file.replace('.ogg', '.mp3')]);
     });
+    SLIME_ART.animations.forEach(({ key, file }) => this.load.spritesheet(`slime-${key}`, `${import.meta.env.BASE_URL}assets/images/enemies/slime/${file}`, { frameWidth: 64, frameHeight: 64 }));
+    NATURE_LAYERS.forEach(({ file }) => this.load.image(`nature-${file}`, `${import.meta.env.BASE_URL}assets/images/backgrounds/nature/${file}`));
   }
   create() {
     document.querySelector('#loading').hidden = true;
@@ -33,6 +36,9 @@ export class BootScene extends Phaser.Scene {
       key: `aidan-${key}`,
       frames: this.anims.generateFrameNumbers(`aidan-${key}`, { start: 0, end: frames - 1 }),
       frameRate: fps, repeat,
+    }));
+    SLIME_ART.animations.forEach(({ key, count, fps, repeat }) => this.anims.create({
+      key: `slime-${key}`, frames: this.anims.generateFrameNumbers(`slime-${key}`, { start: count * 3, end: count * 4 - 1 }), frameRate: fps, repeat,
     }));
     this.registry.set('audio', new AudioManager(this.game));
     if (this.failed.length) {

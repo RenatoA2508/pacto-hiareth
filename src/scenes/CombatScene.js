@@ -1,10 +1,10 @@
 import Phaser from 'phaser';
 import { GAME } from '../config/game.js';
-import { TRAINING, TRAINING_ENEMY, PLAYER_COMBAT } from '../config/combat.js';
+import { TRAINING } from '../config/combat.js';
 import { Player } from '../entities/Player.js';
 import { PracticeEnemy } from '../entities/PracticeEnemy.js';
 import { InputController } from '../managers/InputController.js';
-import { intersects, wallBetween } from '../systems/hitboxes.js';
+import { CombatSystem } from '../systems/CombatSystem.js';
 import { drawLaboratory } from '../ui/drawLaboratory.js';
 
 export class CombatScene extends Phaser.Scene {
@@ -28,11 +28,12 @@ export class CombatScene extends Phaser.Scene {
     this.physics.add.collider(this.player, floor);
     this.physics.add.collider(this.enemies, floor);
     this.physics.add.collider(this.enemies, this.enemies);
-    this.physics.add.overlap(this.player, this.enemies, (_, enemy) => {
-      if (enemy.vitals.alive) this.damagePlayer(TRAINING_ENEMY.contactDamage);
+    this.combat = new CombatSystem(this, {
+      player: this.player, enemies: this.enemies, platforms: TRAINING.platforms, showHitboxes: true,
+      onPlayerDamage: (damage) => this.damagePlayer(damage),
+      onDefeated: () => { this.defeated++; this.updateStats(); },
     });
     this.cameras.main.startFollow(this.player, true, 0.12, 1);
-    this.hitboxGraphics = this.add.graphics();
     this.add.text(180, 260, 'J / ATAQUE CERCANO', { font: '13px Arial', color: '#dcc497' });
     this.add.text(180, 290, '3 objetivos geométricos · sin contenido narrativo', { font: '11px Arial', color: '#aebba9' });
     this.controls = new InputController(this, this.ui);
@@ -77,34 +78,12 @@ export class CombatScene extends Phaser.Scene {
     this.enemies.forEach((enemy) => { if (enemy.active && enemy.body) enemy.setVelocityX(0); });
     this.time.delayedCall(delay, () => this.scene.start('Result', { result, mode: 'combat' }));
   }
-  paintHitbox(box, color) {
-    this.hitboxGraphics.fillStyle(color, 0.15).fillRect(box.x, box.y, box.width, box.height);
-    this.hitboxGraphics.lineStyle(1, color, 0.85).strokeRect(box.x, box.y, box.width, box.height);
-  }
   update() {
     if (this.ending) return;
     const now = this.time.now;
     this.player.move(this.controls.sample());
     this.player.x = Phaser.Math.Clamp(this.player.x, 25, TRAINING.width - 25);
-    this.hitboxGraphics.clear();
-    const playerBox = this.player.attackBox(now);
-    if (playerBox) this.paintHitbox(playerBox, 0xe4c88c);
-    for (const enemy of this.enemies) {
-      if (!enemy.active || !enemy.vitals.alive) continue;
-      if (playerBox && this.player.attackCycle.canHit(enemy, now) && intersects(playerBox, enemy.body) && !wallBetween(this.player.body, enemy.body, TRAINING.platforms)) {
-        if (enemy.takeDamage(PLAYER_COMBAT.damage, now)) {
-          this.player.attackCycle.recordHit(enemy); this.registry.get('audio')?.play('land');
-          if (!enemy.vitals.alive) { this.defeated++; this.updateStats(); }
-        }
-      }
-      if (!enemy.vitals.alive) continue;
-      enemy.updateAI(now, this.player);
-      const enemyBox = enemy.attackBox(now);
-      if (enemyBox) {
-        this.paintHitbox(enemyBox, 0xf09068);
-        if (enemy.brain.attack.canHit(this.player, now) && intersects(enemyBox, this.player.body) && !wallBetween(enemy.body, this.player.body, TRAINING.platforms) && this.damagePlayer(TRAINING_ENEMY.damage)) enemy.brain.attack.recordHit(this.player);
-      }
-    }
+    this.combat.update(now);
     if (this.defeated === this.enemies.length) this.finish('complete');
   }
 }

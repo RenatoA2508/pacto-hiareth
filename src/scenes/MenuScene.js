@@ -16,18 +16,20 @@ export class MenuScene extends Phaser.Scene {
     this.add.text(740, 470, 'AIDAN', { fontFamily: 'Arial', fontSize: '11px', color: '#c2c6ad', letterSpacing: 4 }).setOrigin(0.5);
     ui.gameplay(false);
     const actions = [];
-    if (storage.data.playgroundCheckpoint) actions.push({ label: 'Continuar prueba', run: () => this.scene.start('Playground', { resume: true }) });
-    actions.push({ label: storage.data.playgroundCheckpoint ? 'Empezar de nuevo' : 'Iniciar prueba', secondary: storage.data.playgroundCheckpoint, run: () => {
-      storage.update({ playgroundCheckpoint: false });
-      this.scene.start('Playground', { resume: false });
+    const hasProgress = storage.data.levelReached >= 1;
+    if (hasProgress) actions.push({ label: storage.data.level1Complete ? 'Repetir nivel 1' : 'Continuar nivel 1', run: () => this.scene.start('Level1', { resume: !storage.data.level1Complete }) });
+    actions.push({ label: hasProgress ? 'Nuevo viaje' : 'Comenzar viaje', secondary: hasProgress, run: () => {
+      storage.update({ level1IntroPage: 0, level1Checkpoint: 0, level1Killed: [], level1Complete: false });
+      this.scene.start('Story', { kind: 'intro', playLevel: true });
     } });
     actions.push({ label: storage.data.prologuePage ? 'Continuar prólogo' : 'Leer prólogo', secondary: true, run: () => this.scene.start('Story') });
+    actions.push({ label: storage.data.playgroundCheckpoint ? 'Continuar prueba' : 'Prueba de movimiento', secondary: true, run: () => this.scene.start('Playground', { resume: storage.data.playgroundCheckpoint }) });
     actions.push({ label: 'Entrenamiento de combate', secondary: true, run: () => this.scene.start('Combat') });
     ui.panel({
       eyebrow: 'PLATAFORMAS 2D · EN DESARROLLO',
       title: 'El pacto<br>de <em>Hiareth</em>',
-      description: 'Camina, salta y encuentra tu ritmo. Prueba el movimiento de Aidan antes de comenzar su historia.',
-      note: storage.available ? 'Escenario de prueba · sin contenido narrativo' : 'Guardado no disponible · puedes jugar en esta sesión',
+      description: 'El primer viaje de Aidan atraviesa un bosque en guerra. Alcanza el portal atacando o esquivando a los slimes.',
+      note: storage.available ? 'Nivel 1 disponible · el viaje continúa en desarrollo' : 'Guardado no disponible · puedes jugar en esta sesión',
       actions,
     });
   }

@@ -4,6 +4,7 @@ import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { PLAYER_ART } from '../src/config/game.js';
 import { SOUND_EFFECTS } from '../src/config/audio.js';
+import { SLIME_ART, NATURE_LAYERS } from '../src/config/level1.js';
 
 test('las hojas reales contienen el número de cuadros configurado', () => {
   for (const { file, frames } of PLAYER_ART.animations) {
@@ -29,4 +30,17 @@ test('el prólogo corresponde a la fuente canónica conservada', () => {
   assert.equal(story.sourceSha256, createHash('sha256').update(source).digest('hex'));
   assert.equal(story.paragraphs.length, 28);
   assert.deepEqual(story.paragraphs.map(({ sourceIndex }) => sourceIndex), Array.from({ length: 28 }, (_, i) => i + 33));
+});
+
+test('las filas laterales del slime y las capas de naturaleza existen completas', () => {
+  for (const { file, count } of SLIME_ART.animations) {
+    const png = readFileSync(new URL(`../public/assets/images/enemies/slime/${file}`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), count * 64);
+    assert.equal(png.readUInt32BE(20), 4 * 64);
+  }
+  for (const { file } of NATURE_LAYERS) {
+    const png = readFileSync(new URL(`../public/assets/images/backgrounds/nature/${file}`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), 576);
+    assert.equal(png.readUInt32BE(20), 324);
+  }
 });

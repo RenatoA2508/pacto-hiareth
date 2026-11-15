@@ -1,5 +1,7 @@
 # Comprensión y estado del proyecto
 
+Estado 0.3: primer nivel jugable con naturaleza y slimes aprobados, checkpoints, portal y contador de derrotados independiente del puntaje. Ambas rutas se verificaron: llegar con cero bajas y registrar una baja por combate. Introducción de 34 párrafos y prólogo de 28 preservados. Verificación de guardado, silencio y reintento. El segundo nivel está en preparación; los actos posteriores, Aine visual, música y puntaje siguen pendientes. El Boss Fight continúa bloqueado.
+
 Actualización del segundo incremento: controles validados por el usuario; entrenamiento completo con combate cercano, 3 vidas, objetivos con IA común, derrota y repetición; prólogo literal con guardado de lectura; cinco efectos CC0 con mute. Los dos ZIP gráficos del nivel 1 se recibieron y están en auditoría. Aún no hay un nivel narrativo completo ni música autorizada. Ver `DECISIONS.md` y `VALIDATION.md` para las aprobaciones y pruebas posteriores al primer incremento.
 
 ## Qué se está construyendo

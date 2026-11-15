@@ -45,3 +45,13 @@ Licencia de CraftPix consultada: https://craftpix.net/file-licenses/ . No se ha 
 ## Geometría de laboratorio
 
 Rectángulos, retícula, líneas y marcadores dibujados con Phaser Graphics y CSS dentro del proyecto. No son fondos ni sprites definitivos, no corresponden a lugares de la historia y no sustituyen los recursos aprobados.
+
+## Actualización de integración del nivel 1
+
+El usuario descargó los ZIP oficiales `craftpix-net-823949-free-nature-backgrounds-pixel-art.zip` y `craftpix-net-788364-free-slime-mobs-pixel-art-top-down-sprite-pack.zip`. Están intactos en `assets/originals/level-1/`, ignorados por Git. Sus `License.txt` remiten a la política Freebie de CraftPix consultada. Se usan en el juego; no se redistribuyen como paquetes de arte independientes.
+
+- Naturaleza: capas `nature_1/{1,2,3,5,6,7,8,10}.png`, 576×324, copiadas sin modificaciones a `public/assets/images/backgrounds/nature/`. Se escalan uniformemente y desplazan con distintos factores para parallax.
+- Slime1: hojas Idle, Walk, Attack, Hurt y Death, copiadas sin cambios de píxeles a `public/assets/images/enemies/slime/` y renombradas por acción. Cuadros 64×64, cuatro filas direccionales. Se usa la cuarta fila, mirando a la derecha, con flip horizontal para izquierda. Recuentos 6/8/10/5/10 cuadros por fila. Escala uniforme 2; cuerpo físico 18×18 y origen visible y=40 antes de escala.
+- Ataque cercano aprobado por el usuario tras inspección. No se utilizan Slime2, Slime3, sombras, partes sueltas, PSD ni cupones. No se añaden poderes por el aspecto del paquete.
+- Plataformas de tierra y hierba y portal: gráficos propios por código, sin tileset externo y con colisiones separadas del fondo.
+- Las filas anteriores del inventario conservan la auditoría inicial; este registro actualiza esos dos recursos a INTEGRADOS Y PROBADOS.
