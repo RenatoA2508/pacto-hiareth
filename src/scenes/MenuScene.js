@@ -17,9 +17,14 @@ export class MenuScene extends Phaser.Scene {
     ui.gameplay(false);
     const actions = [];
     const hasProgress = storage.data.levelReached >= 1;
-    if (hasProgress) actions.push({ label: storage.data.level1Complete ? 'Repetir nivel 1' : 'Continuar nivel 1', run: () => this.scene.start('Level1', { resume: !storage.data.level1Complete }) });
+    if (hasProgress) {
+      const level = storage.data.currentLevel;
+      const completed = storage.data[`level${level}Complete`];
+      if (completed && !storage.data[level === 1 ? 'campRead' : 'act2Read']) actions.push({ label: 'Continuar relato', run: () => this.scene.start('Story', { kind: level === 1 ? 'camp' : 'act2' }) });
+      else actions.push({ label: completed ? `Repetir nivel ${level}` : `Continuar nivel ${level}`, run: () => this.scene.start(`Level${level}`, { resume: !completed }) });
+    }
     actions.push({ label: hasProgress ? 'Nuevo viaje' : 'Comenzar viaje', secondary: hasProgress, run: () => {
-      storage.update({ level1IntroPage: 0, level1Checkpoint: 0, level1Killed: [], level1Complete: false });
+      storage.update({ currentLevel: 1, level1IntroPage: 0, level1Checkpoint: 0, level1Killed: [], level1Complete: false, level2Checkpoint: 0, level2Complete: false, campPage: 0, campRead: false, act2Page: 0, act2Read: false });
       this.scene.start('Story', { kind: 'intro', playLevel: true });
     } });
     actions.push({ label: storage.data.prologuePage ? 'Continuar prólogo' : 'Leer prólogo', secondary: true, run: () => this.scene.start('Story') });
@@ -28,8 +33,8 @@ export class MenuScene extends Phaser.Scene {
     ui.panel({
       eyebrow: 'PLATAFORMAS 2D · EN DESARROLLO',
       title: 'El pacto<br>de <em>Hiareth</em>',
-      description: 'El primer viaje de Aidan atraviesa un bosque en guerra. Alcanza el portal atacando o esquivando a los slimes.',
-      note: storage.available ? 'Nivel 1 disponible · el viaje continúa en desarrollo' : 'Guardado no disponible · puedes jugar en esta sesión',
+      description: 'Acompaña a Aidan por el bosque y las ruinas de la antigua federación. Alcanza los portales y continúa el relato.',
+      note: storage.available ? 'Actos 1 y 2 disponibles · el viaje continúa' : 'Guardado no disponible · puedes jugar en esta sesión',
       actions,
     });
   }

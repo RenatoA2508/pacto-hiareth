@@ -87,6 +87,12 @@ export class GameUI extends EventTarget {
     document.querySelector('#combat-health').textContent = `Vida ${health}/${maxHealth} · Slimes derrotados: ${defeated}`;
     document.querySelector('#mode-label').textContent = 'ATACA O ESQUIVA · J PARA ATACAR';
   }
+  cityStats(health, maxHealth, checkpoint) {
+    document.querySelector('#hud-title').textContent = 'ACTO 2 · VUELA ALTO';
+    document.querySelector('#checkpoint-label').textContent = checkpoint ? `Checkpoint ${checkpoint}/2 · alcanza el portal` : 'Alcanza el portal';
+    document.querySelector('#combat-health').textContent = `Vida ${health}/${maxHealth}`;
+    document.querySelector('#mode-label').textContent = 'ATRAVIESA LAS RUINAS';
+  }
   gameplay(active) {
     this.hud.hidden = !active;
     this.touchControls.hidden = !active;

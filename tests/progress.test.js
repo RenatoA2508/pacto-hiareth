@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { StorageManager } from '../src/managers/StorageManager.js';
 import { LevelProgress } from '../src/systems/LevelProgress.js';
 import { LEVEL1 } from '../src/config/level1.js';
+import { LEVEL2 } from '../src/config/level2.js';
 import { MOVEMENT, GAME } from '../src/config/game.js';
 
 function store() {
@@ -47,4 +48,26 @@ test('plataformas elevadas y huecos del nivel son compatibles con el salto aprob
   const ground = LEVEL1.platforms.filter((p) => p.y === 470).sort((a, b) => a.x - b.x);
   for (let i = 1; i < ground.length; i++) assert.ok(ground[i].x - (ground[i - 1].x + ground[i - 1].width) < maxRange - 20);
   for (const platform of LEVEL1.platforms.filter((p) => p.y < 470)) assert.ok(470 - platform.y <= maxRise, `Plataforma ${platform.x} demasiado alta`);
+});
+
+test('el segundo nivel guarda su avance sin perder las bajas del primero', () => {
+  const storage = store(); const first = new LevelProgress(storage, counts);
+  first.defeat(0); first.complete();
+  const second = new LevelProgress(storage, { id: 2, checkpointCount: 3, enemyCount: 0 });
+  second.reachCheckpoint(1); second.complete();
+  assert.equal(storage.data.currentLevel, 2);
+  assert.equal(storage.data.levelReached, 2);
+  assert.equal(storage.data.level2Complete, true);
+  assert.equal(storage.data.level2Checkpoint, 1);
+  assert.deepEqual(storage.data.level1Killed, [0]);
+  assert.equal(storage.data.level1Complete, true);
+  assert.equal(storage.data.highScore, 0);
+});
+test('la ciudad mantiene huecos y plataformas alcanzables sin enemigos inventados', () => {
+  const range = MOVEMENT.speed * 2 * MOVEMENT.jumpSpeed / GAME.gravity;
+  const rise = MOVEMENT.jumpSpeed ** 2 / (2 * GAME.gravity);
+  const floor = LEVEL2.platforms.filter((p) => p.y === 470);
+  assert.deepEqual(LEVEL2.enemies, []);
+  for (let i = 1; i < floor.length; i++) assert.ok(floor[i].x - floor[i - 1].x - floor[i - 1].width < range - 20);
+  for (const p of LEVEL2.platforms.filter((p) => p.y < 470)) assert.ok(470 - p.y <= rise);
 });

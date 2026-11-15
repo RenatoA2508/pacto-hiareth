@@ -14,7 +14,7 @@ export class DialogueReader {
     this.root.innerHTML = '<header><div><span class="eyebrow">EL PACTO DE HIARETH</span><h1 id="story-heading"></h1></div><div class="story-actions"><button type="button" data-story="close">Volver al menú</button></div></header><div class="story-body" tabindex="0" aria-label="Texto de la historia"><p class="story-speaker"></p><p class="story-text"></p></div><footer><button type="button" data-story="previous">← Anterior</button><span class="story-progress" aria-live="polite"></span><button type="button" data-story="next">Siguiente →</button></footer>';
     if (skipLabel) {
       const skip = document.createElement('button'); skip.type = 'button'; skip.textContent = skipLabel;
-      skip.addEventListener('click', onFinish); this.root.querySelector('.story-actions').append(skip);
+      skip.addEventListener('click', () => { storage.update({ [completeKey]: true }); onFinish(); }); this.root.querySelector('.story-actions').append(skip);
     }
     this.root.querySelector('h1').textContent = story.title;
     this.body = this.root.querySelector('.story-body');
@@ -45,7 +45,8 @@ export class DialogueReader {
     // Se conserva el párrafo completo; el rótulo identifica la voz sin reescribirlo.
     this.text.textContent = paragraph;
     const colon = paragraph.indexOf(':');
-    this.speaker.textContent = colon > 0 && colon < 45 ? paragraph.slice(0, colon) : 'Narración';
+    const prefix = paragraph.slice(0, colon);
+    this.speaker.textContent = /^(Aidan|Aine|Elfa|Mujer|Líder del pacto(?: de Hiareth)?)$/i.test(prefix) ? prefix : 'Narración';
     this.previous.disabled = this.index === 0;
     this.next.textContent = this.index === this.story.paragraphs.length - 1 ? 'Continuar' : 'Siguiente →';
     this.root.querySelector('.story-progress').textContent = `${this.index + 1} / ${this.story.paragraphs.length}`;

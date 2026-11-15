@@ -1,6 +1,6 @@
-# Verificación del primer incremento
+# Verificación por incrementos
 
-Fecha: 15 de noviembre de 2026. Se distingue implementación de prueba y de aprobación del diseño.
+Fecha: 15 de noviembre de 2026. Los apartados se registran cronológicamente; cada incremento posterior actualiza el anterior. Se distingue implementación, prueba y aprobación del diseño.
 
 ## Comprobaciones realizadas
 
@@ -49,3 +49,17 @@ Verificado en navegador: introducción de 34 párrafos fuente, entrada al bosque
 Ruta de combate: repetir nivel limpia el contador; ataque cercano derrota el primer slime y registra una sola baja con vida 3/3. Recargar conserva esa baja y el silencio activado, sin reaparecer el enemigo ya derrotado. No se observaron errores de consola en las comprobaciones.
 
 Se corrigieron dos plataformas que excedían la altura máxima del salto aprobado y se añadió una prueba de geometría. Cuatro pruebas nuevas verifican progreso sin bajas, IDs de bajas únicos, reinicio y checkpoints válidos; otra verifica las dimensiones reales de las hojas de slime y capas de naturaleza. La extracción del texto compara los 34 párrafos adicionales con el Word. Durante tramos medidos se observaron 58–59 FPS en la vista previa; todavía no se certifican 45 FPS sostenidos en equipos físicos.
+
+## Cuarto incremento — ciudad y continuidad completa disponible
+
+Verificado en navegador: primer portal → lectura de fogata (incluido el nombre corregido en 15/57) → ciudad, recorrido completo del nivel 2, ambos checkpoints con vida 3/3, pausa/reanudación y portal. La continuación muestra los 54 párrafos de recuerdos y transición al limbo; avanzar al último y continuar muestra «Fin de esta versión». No se inventó contenido de los actos sin escribir. No se observaron errores de consola en este recorrido.
+
+La extracción contrasta 173 párrafos con el Word: 28+34+57+54. La única diferencia autorizada es Airan → Aidan en el párrafo fuente 118; se verifica en los metadatos y se conserva la fuente intacta. Las pruebas adicionales cubren progreso independiente de cada nivel, geometría del salto en ciudad, ausencia de enemigos inventados, dimensiones de las cinco capas y validación de los nuevos campos de guardado.
+
+Estado automatizado final comprobado: 28 casos en cinco archivos (recursos 5, audio 3, combate 8, progreso 6 y persistencia 6), más la comparación completa de narrativa. npm test y la ejecución directa de los cinco archivos terminaron sin fallos. Las lecturas de vista previa de 59–74 FPS no certifican rendimiento físico sostenido.
+
+### Revisión final y capturas
+
+Se guardaron cuatro capturas reales de la versión 0.4, sin diagnóstico superpuesto: menú, introducción, bosque y ciudad. HUD legible sobre ambos fondos; pausa y retorno al menú comprobados. La consola no registró errores ni advertencias en esa revisión. El intento de forzar el viewport móvil en esta sesión no cambió las dimensiones efectivas de la página, por lo que no constituye una nueva validación móvil. Se mantiene pendiente la prueba física.
+
+Compilación de producción y ZIP web/fuente 0.4.0 verificados, incluida integridad ZIP y exclusión de credenciales, Git, node_modules y ZIP originales. Las capturas se entregan por separado; el video no se ha grabado.

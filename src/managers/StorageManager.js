@@ -1,5 +1,11 @@
 const KEY = 'pacto-hiraeth:v1';
-const defaults = () => ({ version: 1, highScore: 0, levelReached: 0, muted: false, playgroundCheckpoint: false, prologuePage: 0, prologueComplete: false, level1Checkpoint: 0, level1Killed: [], level1Complete: false, level1IntroPage: 0, level1IntroRead: false });
+const defaults = () => ({
+  version: 1, highScore: 0, levelReached: 0, currentLevel: 1, muted: false,
+  playgroundCheckpoint: false, prologuePage: 0, prologueComplete: false,
+  level1Checkpoint: 0, level1Killed: [], level1Complete: false, level1IntroPage: 0, level1IntroRead: false,
+  level2Checkpoint: 0, level2Killed: [], level2Complete: false,
+  campPage: 0, campRead: false, act2Page: 0, act2Read: false,
+});
 
 export function sanitizeSave(value) {
   if (!value || typeof value !== 'object' || value.version !== 1) return defaults();
@@ -17,6 +23,12 @@ export function sanitizeSave(value) {
     level1Complete: value.level1Complete === true,
     level1IntroPage: number(value.level1IntroPage),
     level1IntroRead: value.level1IntroRead === true,
+    currentLevel: value.currentLevel === 2 ? 2 : 1,
+    level2Checkpoint: Math.min(number(value.level2Checkpoint), 2),
+    level2Killed: [],
+    level2Complete: value.level2Complete === true,
+    campPage: number(value.campPage), campRead: value.campRead === true,
+    act2Page: number(value.act2Page), act2Read: value.act2Read === true,
   };
 }
 

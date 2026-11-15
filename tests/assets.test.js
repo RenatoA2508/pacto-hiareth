@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { PLAYER_ART } from '../src/config/game.js';
 import { SOUND_EFFECTS } from '../src/config/audio.js';
 import { SLIME_ART, NATURE_LAYERS } from '../src/config/level1.js';
+import { CITY_LAYERS } from '../src/config/level2.js';
 
 test('las hojas reales contienen el número de cuadros configurado', () => {
   for (const { file, frames } of PLAYER_ART.animations) {
@@ -43,4 +44,18 @@ test('las filas laterales del slime y las capas de naturaleza existen completas'
     assert.equal(png.readUInt32BE(16), 576);
     assert.equal(png.readUInt32BE(20), 324);
   }
+});
+
+test('las capas de ciudad y los capítulos adicionales corresponden a archivos reales', () => {
+  for (const { file } of CITY_LAYERS) {
+    const png = readFileSync(new URL(`../public/assets/images/backgrounds/city/${file}`, import.meta.url));
+    assert.equal(png.readUInt32BE(16), 576); assert.equal(png.readUInt32BE(20), 324);
+  }
+  for (const name of ['camp', 'act2']) {
+    const chapter = JSON.parse(readFileSync(new URL(`../src/data/${name}.json`, import.meta.url)));
+    assert.ok(chapter.paragraphs.length > 40);
+    assert.ok(chapter.paragraphs.every(({ text }) => text.trim()));
+  }
+  const camp = JSON.parse(readFileSync(new URL('../src/data/camp.json', import.meta.url)));
+  assert.equal(camp.paragraphs.find(({ sourceIndex }) => sourceIndex === 118).text, 'Aidan: Aidan… ¿Y tú?');
 });

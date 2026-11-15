@@ -10,9 +10,10 @@ OUT.mkdir(exist_ok=True)
 assert (ROOT / 'dist/index.html').is_file(), 'Ejecutar npm run build primero'
 instructions = '''El pacto de Hiareth — incremento de desarrollo
 
-Esta versión incluye el primer nivel con slimes, checkpoint, contador de bajas,
-introducción, prólogo, laboratorio de movimiento y entrenamiento de combate.
-Los niveles narrativos y el juego completo todavía están pendientes.
+Esta versión incluye dos niveles (bosque y ciudad), slimes, checkpoints,
+contador de bajas y el relato disponible de los primeros dos actos, además
+de prólogo, laboratorio de movimiento y entrenamiento de combate.
+Los actos posteriores y el cierre del relato todavía están pendientes.
 
 Web compilada: desde esta carpeta ejecutar python3 -m http.server 8080
 y abrir http://localhost:8080 . No abrir index.html con file://.
@@ -20,7 +21,7 @@ y abrir http://localhost:8080 . No abrir index.html con file://.
 Código fuente: npm ci, npm test y npm run dev.
 Para servir el dist incluido: python3 -m http.server 8080 --directory dist
 
-Controles: A/D o flechas, Espacio para saltar, J para ataque en entrenamiento,
+Controles: A/D o flechas, Espacio para saltar, J para ataque cercano,
 Escape para pausa y botones táctiles equivalentes. Silencio en la cabecera.
 '''
 

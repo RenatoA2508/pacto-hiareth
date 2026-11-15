@@ -24,6 +24,7 @@ export const NATURE_LAYERS = Object.freeze([
   { file: '8.png', factor: 0.8 }, { file: '10.png', factor: 0.95 },
 ]);
 export const LEVEL1 = Object.freeze({
+  id: 1, biome: 'nature', title: 'TIERRA, MAR Y CIELO',
   width: 4300, height: 680, start: { x: 140, feetY: 468 },
   portal: { x: 4110, feetY: 470 },
   checkpoints: [{ x: 140, feetY: 468 }, { x: 1680, feetY: 468 }, { x: 3100, feetY: 468 }],

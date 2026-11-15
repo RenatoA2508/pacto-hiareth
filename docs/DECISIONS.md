@@ -51,3 +51,11 @@
 **IMPLEMENTADO:** primer nivel de 4300 px, ocho capas originales de naturaleza, seis slimes, dos checkpoints y portal. Bajas únicas guardadas por ID del viaje, sin duplicarse al recargar; los enemigos ya derrotados no reaparecen al reintentar. Nuevo viaje limpia el contador.
 
 **PROBADO EN NAVEGADOR:** ruta completa con cero bajas y llegada al portal, checkpoints 1/2 y 2/2, recuperación tras recargar, derrota/reintento, combate que registra una baja sin perder vida y persistencia del contador y silencio. Diagnóstico de la vista previa mostró aproximadamente 58–59 FPS durante tramos del recorrido; falta benchmark físico sostenido.
+
+## 2026-11-15 — Segundo recorrido y límite del relato
+
+**IMPLEMENTADO:** nivel 2 de 4200 px con las cinco capas originales del fondo 3 de ciudad aprobado. Geometría de plataformas, dos checkpoints y portal, con progreso independiente del bosque. No hay enemigos nuevos: faltan recursos y comportamiento aprobados para esta zona.
+
+**NARRATIVA:** se integran los 57 párrafos de fogata/llegada a ciudad y los 54 de recuerdos/transición al limbo, respetando el Word. Solo se aplica Airan → Aidan en el párrafo fuente 118, según la corrección del usuario, sin modificar el original. No se reescribe el diálogo según las bajas.
+
+**LÍMITE:** tras el último párrafo existente se muestra «Fin de esta versión». No representa el final ficticio del juego. Actos 3, 4, final y Boss Fight siguen pendientes/bloqueados. La nota anterior «todavía no se implementaron diálogos» corresponde al primer incremento; queda superada por estas integraciones.

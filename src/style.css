@@ -40,6 +40,7 @@ button:focus-visible, a:focus-visible, #game:focus-visible { outline: 2px solid 
 .panel.modal .panel-actions button { min-width: 250px; }
 .hud { position: absolute; top: 0; left: 0; right: 0; display: flex; align-items: start; justify-content: space-between; gap: 12px; padding: 20px 23px; pointer-events: none; background: linear-gradient(#102028e8, transparent); }
 .hud-location { display: grid; gap: 8px; }
+.hud-location { background: #102028e8; border: 1px solid #64756b88; padding: 9px 11px; max-width: calc(100% - 80px); }
 .hud-location .eyebrow { color: #e0c58f; font-size: 9px; }
 .hud-location strong { font-size: 12px; font-weight: 400; }
 .hud-actions { display: flex; gap: 8px; pointer-events: auto; }

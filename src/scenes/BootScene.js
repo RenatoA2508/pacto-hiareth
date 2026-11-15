@@ -3,6 +3,7 @@ import { PLAYER_ART } from '../config/game.js';
 import { SOUND_EFFECTS } from '../config/audio.js';
 import { AudioManager } from '../managers/AudioManager.js';
 import { SLIME_ART, NATURE_LAYERS } from '../config/level1.js';
+import { CITY_LAYERS } from '../config/level2.js';
 
 export class BootScene extends Phaser.Scene {
   constructor() { super('Boot'); }
@@ -22,6 +23,7 @@ export class BootScene extends Phaser.Scene {
     });
     SLIME_ART.animations.forEach(({ key, file }) => this.load.spritesheet(`slime-${key}`, `${import.meta.env.BASE_URL}assets/images/enemies/slime/${file}`, { frameWidth: 64, frameHeight: 64 }));
     NATURE_LAYERS.forEach(({ file }) => this.load.image(`nature-${file}`, `${import.meta.env.BASE_URL}assets/images/backgrounds/nature/${file}`));
+    CITY_LAYERS.forEach(({ file }) => this.load.image(`city-${file}`, `${import.meta.env.BASE_URL}assets/images/backgrounds/city/${file}`));
   }
   create() {
     document.querySelector('#loading').hidden = true;

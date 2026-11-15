@@ -1,57 +1,45 @@
-# Inventario y créditos de recursos
+# Inventario y créditos — 0.4.0
 
-Auditoría inicial: 15 de noviembre de 2026. Un enlace no significa que un recurso esté descargado o integrado.
+Fecha de integración y auditoría: 15 de noviembre de 2026. Solo los archivos usados y sus licencias se distribuyen con el juego. Los ZIP originales están archivados localmente en assets/originals/, ignorados por Git y excluidos del build y los paquetes de entrega.
 
 ## Aidan — Evil Wizard 2
 
-- Autor: LuizMelo.
-- Fuente: https://luizmelo.itch.io/evil-wizard-2
-- Descarga: opción gratuita ofrecida por el autor, sin pago ni cuenta, 2026-11-15.
-- Original local: `assets/originals/aidan/EVil Wizard 2.zip`, intacto y fuera del build y de Git.
-- SHA-256 del ZIP: `438ee456bf4f6fde3cff1bd80a0356174756c46788911703f4ad7096c120029a`.
-- Licencia: **CC0**, verificada en la página y en `License.txt` del ZIP; el autor admite uso comercial y no comercial. Atribución no obligatoria; se incluye en README y pie de la aplicación.
-- Integrados: `public/assets/images/characters/aidan/{Idle,Run,Jump,Fall}.png` y `License.txt`.
-- Modificaciones: ninguna en los PNG. Escala uniforme 0.9 en juego y 2 en la vista del menú; volteo horizontal por código.
-- Formato: PNG RGBA, cuadros de 250 × 250, dibujo mirando a la derecha.
-- Compatibilidad: lateral, permite correr y saltar. La base visible termina en y=167; el cuerpo físico evita la transparencia.
+Autor: LuizMelo. [Página original](https://luizmelo.itch.io/evil-wizard-2). Licencia **CC0**, indicada en la página y en License.txt del ZIP. Descarga gratuita ofrecida por el autor sin cuenta ni pago. SHA-256 del ZIP: `438ee456bf4f6fde3cff1bd80a0356174756c46788911703f4ad7096c120029a`.
 
-| Hoja inspeccionada en el ZIP | Dimensiones | Cuadros | Uso actual |
-| --- | --- | --- | --- |
-| Idle.png | 2000 × 250 | 8 | Reposo, 8 fps |
-| Run.png | 2000 × 250 | 8 | Carrera, 12 fps |
-| Jump.png | 500 × 250 | 2 | Ascenso, 8 fps |
-| Fall.png | 500 × 250 | 2 | Descenso, 8 fps |
-| Attack1.png | 2000 × 250 | 8 | No integrado; combate por definir |
-| Attack2.png | 2000 × 250 | 8 | No integrado; combate por definir |
-| Take hit.png | 750 × 250 | 3 | No integrado; daño por definir |
-| Death.png | 1750 × 250 | 7 | No integrado; muerte por definir |
+Los PNG de public/assets/images/characters/aidan/ no tienen modificaciones de píxeles. Escala uniforme 0.9 en juego, 2 en menú; volteo horizontal por código. Cada cuadro mide 250×250; cuerpo físico 30×65 con offset (111,102), separado de la transparencia. El origen vertical visible es 167/250.
 
-## Recursos pendientes de integración
+| Archivo integrado | Cuadros | Uso |
+| --- | --- | --- |
+| Idle.png | 8 | Reposo |
+| Run.png | 8 | Carrera |
+| Jump.png | 2 | Ascenso |
+| Fall.png | 2 | Descenso |
+| Attack1.png | 8 | Ataque cercano aprobado |
+| Take hit.png | 3 | Daño |
+| Death.png | 7 | Muerte |
 
-| Uso | Fuente original | Archivo local | Licencia y verificación | Estado |
-| --- | --- | --- | --- | --- |
-| Fondo nivel 1 | https://craftpix.net/freebies/free-nature-backgrounds-pixel-art/ | Ninguno | Ficha y licencia Freebie consultadas; uso en juegos permitido, redistribución del paquete fuente restringida | Descarga requiere iniciar sesión en CraftPix. Capas no inspeccionadas. |
-| Slimes nivel 1 | https://craftpix.net/freebies/free-slime-mobs-pixel-art-top-down-sprite-pack/ | Ninguno | Ficha consultada; política Freebie revisada, licencia del archivo aún no inspeccionada | Perspectiva Top-Down confirmada en ficha; compatibilidad lateral pendiente de inspección y aprobación. |
-| Fondo nivel 2 | https://craftpix.net/freebies/free-city-ruin-backgrounds-pixel-art/ | Ninguno | Pendiente de verificación individual | Referencia conservada. |
-| Fondo nivel 3 | https://craftpix.net/freebies/free-pixel-art-abandoned-places-background-collection/ | Ninguno | Pendiente de verificación individual | Referencia conservada. |
-| Esqueletos nivel 3 | https://craftpix.net/freebies/free-skeleton-pixel-art-sprite-sheets/ | Ninguno | Pendiente de verificación individual | Sin animaciones inspeccionadas ni ataques asignados. |
-| Fondo del jefe | https://craftpix.net/freebies/free-moon-pixel-game-backgrounds/ | Ninguno | Pendiente de verificación individual | No integrado; Boss Fight bloqueado. |
-| Paquete adicional | https://craftpix.net/product/3-enemy-character-sprite-set/ | Ninguno | Autoría, adquisición y licencia por aclarar | No descargar ni integrar sin aclarar procedencia. |
-| Aine | No proporcionada | Ninguno | Pendiente | Sin sustitución. |
-| Tileset/plataformas finales | No proporcionada | Ninguno | Pendiente | La geometría del laboratorio solo sirve para probar colisiones. |
+Attack2 no se utiliza. El License.txt original acompaña los PNG.
 
-Licencia de CraftPix consultada: https://craftpix.net/file-licenses/ . No se ha iniciado sesión, creado cuenta ni descargado o redistribuido ningún paquete de CraftPix. Mantener los originales fuera de `public/` y revisar permiso de versionar recursos antes de integrarlos en un repositorio accesible.
+## CraftPix — naturaleza, slimes y ciudad
 
-## Geometría de laboratorio
+[Política oficial de licencias](https://craftpix.net/file-licenses/), referenciada también por los archivos originales. Recursos Freebie usados dentro del juego; no se distribuyen como paquetes de arte independientes. Registro local de procedencia en public/assets/licenses/craftpix/License.txt. No se atribuye CC0 a estos recursos.
 
-Rectángulos, retícula, líneas y marcadores dibujados con Phaser Graphics y CSS dentro del proyecto. No son fondos ni sprites definitivos, no corresponden a lugares de la historia y no sustituyen los recursos aprobados.
+| Recurso | Fuente aprobada | Procedencia de la descarga |
+| --- | --- | --- |
+| Naturaleza | [Free Nature Backgrounds Pixel Art](https://craftpix.net/freebies/free-nature-backgrounds-pixel-art/) | ZIP oficial entregado por el usuario: craftpix-net-823949-free-nature-backgrounds-pixel-art.zip |
+| Slimes | [Free Slime Mobs Pixel Art Top Down Sprite Pack](https://craftpix.net/freebies/free-slime-mobs-pixel-art-top-down-sprite-pack/) | ZIP oficial entregado por el usuario: craftpix-net-788364-free-slime-mobs-pixel-art-top-down-sprite-pack.zip |
+| Ciudad | [Free City Ruin Backgrounds Pixel Art](https://craftpix.net/freebies/free-city-ruin-backgrounds-pixel-art/) | Mismo paquete descargado desde el [canal del editor en itch.io](https://free-game-assets.itch.io/free-city-ruin-backgrounds-pixel-art), sin cuenta ni pago. license.txt remite a CraftPix. |
 
-## Actualización de integración del nivel 1
+- Naturaleza: nature_1/{1,2,3,5,6,7,8,10}.png, ocho capas 576×324 copiadas intactas a public/assets/images/backgrounds/nature/. Escala uniforme y parallax por código.
+- Slime1: Idle, Walk, Attack, Hurt y Death, cuadros 64×64, cuatro filas direccionales. Se usa la cuarta fila lateral, con volteo horizontal hacia la izquierda. Recuentos por fila 6/8/10/5/10. PNG intactos, renombrados por acción en public/assets/images/enemies/slime/. Escala uniforme 2, cuerpo 18×18 y origen visible y=40/64. Ataque cercano aprobado; no se añaden proyectiles ni variantes elementales.
+- Ciudad: background 3/{1,2,3,4,5}.png, cinco capas 576×324 copiadas intactas a public/assets/images/backgrounds/city/. La imagen con ovnis corresponde al lugar descrito en el texto; los ovnis permanecen decorativos. No se usan los otros tres fondos, PSD, cupones ni demos.
 
-El usuario descargó los ZIP oficiales `craftpix-net-823949-free-nature-backgrounds-pixel-art.zip` y `craftpix-net-788364-free-slime-mobs-pixel-art-top-down-sprite-pack.zip`. Están intactos en `assets/originals/level-1/`, ignorados por Git. Sus `License.txt` remiten a la política Freebie de CraftPix consultada. Se usan en el juego; no se redistribuyen como paquetes de arte independientes.
+## Kenney — efectos
 
-- Naturaleza: capas `nature_1/{1,2,3,5,6,7,8,10}.png`, 576×324, copiadas sin modificaciones a `public/assets/images/backgrounds/nature/`. Se escalan uniformemente y desplazan con distintos factores para parallax.
-- Slime1: hojas Idle, Walk, Attack, Hurt y Death, copiadas sin cambios de píxeles a `public/assets/images/enemies/slime/` y renombradas por acción. Cuadros 64×64, cuatro filas direccionales. Se usa la cuarta fila, mirando a la derecha, con flip horizontal para izquierda. Recuentos 6/8/10/5/10 cuadros por fila. Escala uniforme 2; cuerpo físico 18×18 y origen visible y=40 antes de escala.
-- Ataque cercano aprobado por el usuario tras inspección. No se utilizan Slime2, Slime3, sombras, partes sueltas, PSD ni cupones. No se añaden poderes por el aspecto del paquete.
-- Plataformas de tierra y hierba y portal: gráficos propios por código, sin tileset externo y con colisiones separadas del fondo.
-- Las filas anteriores del inventario conservan la auditoría inicial; este registro actualiza esos dos recursos a INTEGRADOS Y PROBADOS.
+**CC0**, licencias originales en public/assets/audio/licenses/. [Interface Sounds](https://kenney.nl/assets/interface-sounds) e [Impact Sounds](https://kenney.nl/assets/impact-sounds). Cinco efectos integrados: click_001, confirmation_001, back_001, footstep_concrete_000 e impactSoft_medium_000. Los OGG se conservan intactos; sus fallback MP3 se codificaron con ffmpeg. Ver AUDIO_ASSET_CATALOG.md para funciones y duraciones. No hay música integrada ni audio extraído de YouTube.
+
+## Geometría propia y recursos pendientes
+
+Plataformas, portales, marcadores de checkpoint, retículas del laboratorio y objetivos de entrenamiento se dibujan con Phaser Graphics y CSS. Son elementos propios del proyecto, separados del fondo y de su colisión. No representan nuevos personajes ni sustituyen el sprite de Aine.
+
+Aine, enemigos de ciudad y recursos de actos posteriores siguen pendientes. Los enlaces a esqueletos, lugares abandonados y fondo de luna se conservan en la fuente maestra; no se integraron sin el contenido narrativo correspondiente. El Boss Fight continúa bloqueado.

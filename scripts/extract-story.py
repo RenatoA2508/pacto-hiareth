@@ -42,3 +42,29 @@ if '--check' in sys.argv:
 else:
     intro_target.write_text(intro_content)
     print('Introducción nivel 1 extraída sin cambios en la fuente.')
+
+assert paragraphs[118] == 'Aidan: Airan… ¿Y tú?'
+for filename, title, indexes in [
+    ('camp.json', 'TIERRA, MAR Y CIELO', range(104, 161)),
+    ('act2.json', 'ACTO 2 · VUELA ALTO', range(170, 224)),
+]:
+    entries = []
+    for index in indexes:
+        text = paragraphs[index]
+        if not text.strip():
+            continue
+        # Única corrección expresamente autorizada por el usuario; el Word no cambia.
+        if index == 118:
+            text = 'Aidan: Aidan… ¿Y tú?'
+        entries.append({'sourceIndex': index, 'text': text})
+    chapter = {'title': title, 'source': SOURCE.name, 'sourceSha256': data['sourceSha256'], 'paragraphs': entries}
+    if filename == 'camp.json':
+        chapter['authorizedCorrections'] = [{'sourceIndex': 118, 'from': paragraphs[118], 'to': 'Aidan: Aidan… ¿Y tú?'}]
+    target = ROOT / 'src/data' / filename
+    content = json.dumps(chapter, ensure_ascii=False, indent=2) + '\n'
+    if '--check' in sys.argv:
+        assert target.read_text() == content, f'{filename} difiere del texto autorizado'
+        note = 'corrección autorizada solo en p118' if filename == 'camp.json' else 'sin cambios en el texto'
+        print(f'{filename} verificado: {len(entries)} párrafos, {note}.')
+    else:
+        target.write_text(content)

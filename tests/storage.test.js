@@ -58,3 +58,19 @@ test('guarda la lectura sin perder el checkpoint de una partida anterior', () =>
   assert.equal(loaded.data.playgroundCheckpoint, true);
   assert.equal(loaded.data.muted, true);
 });
+
+test('el avance entre capítulos conserva campos anteriores y valida datos nuevos', () => {
+  const storage = memoryStorage(JSON.stringify({ version: 1, level1Killed: [0, 0, -1, '2', 99], level2Checkpoint: 99, currentLevel: 8, campPage: -1, act2Read: 'true' }));
+  const save = new StorageManager(storage);
+  assert.deepEqual(save.data.level1Killed, [0]);
+  assert.equal(save.data.level2Checkpoint, 2);
+  assert.equal(save.data.currentLevel, 1);
+  assert.equal(save.data.campPage, 0);
+  assert.equal(save.data.act2Read, false);
+  save.update({ currentLevel: 2, campRead: true, act2Page: 53 });
+  const next = new StorageManager(storage);
+  assert.equal(next.data.currentLevel, 2);
+  assert.equal(next.data.campRead, true);
+  assert.equal(next.data.act2Page, 53);
+  assert.deepEqual(next.data.level1Killed, [0]);
+});
