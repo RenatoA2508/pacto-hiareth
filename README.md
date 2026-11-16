@@ -1,6 +1,6 @@
 # El pacto de Hiareth
 
-Plataformas lateral 2D con **Phaser 3.90.0, JavaScript y Vite**. Aidan atraviesa el bosque y la ciudad en ruinas del relato. El texto original tiene prioridad y se conserva en `docs/source/`.
+Plataformas lateral 2D con **Phaser 3.90.0, JavaScript y Vite**. Aidan atraviesa los portales del Pacto en busca de un fragmento de Lia Fáil. El Word conserva el texto original. La documentación maestra reúne la continuación de los actos 3, 4 y final.
 
 ## Ejecutar
 
@@ -20,18 +20,16 @@ npm run preview  # Revisar la compilación
 npm run package  # Generar ZIP de web y fuente en release/
 ```
 
-## Contenido de la versión 0.5
+## Contenido de la versión 1.0
 
-- **Nivel 1 — Tierra, mar y cielo:** fondo de naturaleza por capas, seis slimes con vistas laterales reales, plataformas, tres huecos, dos checkpoints y portal. Es posible terminar sin derrotar slimes; la ruta con cero bajas fue comprobada en navegador.
-- **Nivel 2 — Vuela alto:** cinco capas del fondo de ciudad aprobado, plataformas, tres huecos, dos checkpoints y portal. Los ovnis forman parte del fondo; no se inventan enemigos interactivos para esta zona.
-- **Combate cercano:** J y botón táctil, animaciones reales, tres puntos de vida, invulnerabilidad breve, anticipación del ataque enemigo, ventanas activas y bloqueo de daño a través de paredes. No hay proyectiles.
-- **Contador separado:** cada slime derrotado se registra una sola vez. Las bajas no otorgan puntos ni seleccionan una rama narrativa. Al reintentar desde checkpoint se conserva el registro de bajas del viaje; Nuevo viaje o Repetir nivel limpia ese registro.
-- **Narrativa:** 173 párrafos del Word: prólogo (28), introducción (34), fogata y llegada a la ciudad (57), recuerdos y transición al limbo (54). Única corrección autorizada: Airan → Aidan en el párrafo fuente 118. Guardado del punto de lectura y opción de saltar la lectura.
-- **Prácticas:** laboratorio de movimiento y entrenamiento con tres objetivos geométricos independientes de la historia.
-- **Audio:** cinco efectos CC0 de Kenney, OGG con fallback MP3; silencio persistente disponible en la cabecera. No hay música integrada.
-- **Estados:** menú, pausa, caída, derrota por vida, reintento y llegada al portal. Primer portal → fogata → ciudad → recuerdos → Fin de esta versión. La última pantalla indica el límite del contenido disponible.
+- **Tierra, mar y cielo.** Bosque con seis slimes que se pueden esquivar o combatir.
+- **Vuela alto.** Ruinas de la Antigua Federación con cuatro autómatas de defensa terrestres.
+- **Limbo (Enfermedad).** El jugador elige huir por un túnel o abrir paso con magia. Esa decisión determina la ruta del acto 4. Los perros esqueléticos hacen daño por contacto y al atacar.
+- **Don't Try.** Valle de montaña y galerías. Aidan busca a Aine. Según la ruta hay una despedida o un combate de rescate.
+- **Hiareth.** Castillo, diálogo con el dragón y combate por turnos. La victoria entrega un fragmento de Lia Fáil y da paso al epílogo correspondiente.
+- **Prácticas y audio.** Laboratorio de movimiento, entrenamiento de combate y cinco efectos CC0 de Kenney. El silencio se guarda entre sesiones.
 
-**Todavía no es la entrega académica completa.** Faltan los actos 3, 4 y final, sprite de Aine, enemigos aprobados para la ciudad, música autorizada, criterio de puntuación, video y autoevaluación del estudiante. El Boss Fight continúa bloqueado. `highScore` permanece en cero hasta aprobar el puntaje; `levelReached` registra el máximo nivel iniciado y `currentLevel` el recorrido para continuar.
+Cada checkpoint vale 100 puntos y cada acto completado en plataformas suma 500. La ruta de rescate y las bajas no conceden puntos. El récord se conserva al iniciar otro viaje.
 
 ## Controles
 
@@ -48,7 +46,7 @@ Haz clic en el escenario si el teclado perdió el foco. Tab y Enter sirven para 
 
 ## Guardado
 
-La clave `pacto-hiraeth:v1` conserva silencio, nivel alcanzado, checkpoints de ambos niveles, bajas únicas del primero, resultados y posición de lectura de cada capítulo. Un viaje nuevo reinicia su recorrido y sus bajas; el nivel máximo alcanzado se conserva. El laboratorio tiene un checkpoint independiente. Datos corruptos o almacenamiento bloqueado no impiden jugar; en ese caso se usa memoria de la sesión.
+La clave `pacto-hiraeth:v1` conserva silencio, nivel alcanzado, checkpoints, bajas de cada recorrido, elección del Limbo, etapa de la historia, récord y posición de lectura. Un viaje nuevo reinicia su recorrido y sus bajas; el nivel máximo alcanzado se conserva. El laboratorio tiene un checkpoint independiente. Datos corruptos o almacenamiento bloqueado no impiden jugar; en ese caso se usa memoria de la sesión.
 
 ## Código y comprensión técnica
 
@@ -56,31 +54,31 @@ La clave `pacto-hiraeth:v1` conserva silencio, nivel alcanzado, checkpoints de a
 src/
   main.js                  Phaser y conexión de gestores
   config/                  Movimiento, arte, audio, combate y nivel
-  data/                    Geometría y narrativa extraída
-  entities/                Player, BaseEnemy, SlimeEnemy y PracticeEnemy
+  data/                    Narrativa original y continuación
+  entities/                Aidan, Aine y enemigos
   managers/                Entrada, audio y almacenamiento
   systems/                 Vida, ataques, IA, colisiones ofensivas y progreso
-  scenes/                  Boot, Menu, Story, Level1, Level2, prácticas, Pause, Result y VersionEnd
+  scenes/                  Menú, lectores, niveles, prácticas, pausa, resultados y duelo
   ui/                      Interfaz HTML, lectura y dibujo de escenarios
 scripts/                   Extracción literal y empaquetado
 public/assets/             Solo recursos integrados y sus licencias
 assets/originals/           ZIP locales ignorados por Git y fuera del build
-docs/source/               Las tres fuentes sin modificaciones
+docs/source/               Word originales y guion completo
 tests/                     Pruebas con node:test
 ```
 
-`BaseEnemy` comparte física, vida y estados; `SlimeEnemy` aporta el arte y configuración inspeccionados. `EnemyBrain` decide IDLE/CHASE/ATTACK/HURT/DEATH. `CombatSystem` aplica hitboxes activas y un solo golpe por víctima y ataque. `Vitals` comparte invulnerabilidad entre contacto y ataque para impedir daño duplicado. `LevelProgress` guarda bajas y checkpoints sin acoplarlos al puntaje.
+`BaseEnemy` comparte física, vida y estados; `SlimeEnemy` aporta el arte y configuración inspeccionados. `EnemyBrain` decide IDLE/CHASE/ATTACK/HURT/DEATH. `CombatSystem` aplica hitboxes activas y un solo golpe por víctima y ataque. `Vitals` comparte invulnerabilidad entre contacto y ataque para impedir daño duplicado. `LevelProgress` guarda bajas y calcula el puntaje a partir de checkpoints y recorridos completados.
 
 Los cuadros de Aidan miden 250 × 250, pero su hitbox mide 30 × 65 antes de escala, con offset (111,102). La transparencia no colisiona. Los slimes usan cuadros de 64 × 64 y la cuarta fila lateral del paquete. La gravedad, velocidad y altura de salto están centralizadas. Se usa Canvas, sin shaders. El proyecto se escribió por módulos, sin plantilla de juego descargada.
 
-En desarrollo, `/?debug` muestra FPS, posición y suelo en el laboratorio y ambos niveles. No aparece en producción. Las lecturas de FPS de la vista previa no sustituyen medir los dispositivos de entrega.
+En desarrollo, `/?debug` muestra FPS, posición y suelo en el laboratorio y los niveles de la historia. No aparece en producción. Las lecturas de FPS de la vista previa no sustituyen medir los dispositivos de entrega.
 
 ## Recursos y documentación
 
 - [Estado y pendientes](docs/PROJECT_STATUS.md), [decisiones](docs/DECISIONS.md) y [pruebas](docs/VALIDATION.md).
 - [Guion de demo y defensa](docs/DEMO_GUIDE.md).
 - [Créditos de arte](docs/ASSET_CREDITS.md) y [catálogo de audio](docs/AUDIO_ASSET_CATALOG.md).
-- [Fuente maestra original](docs/source/GAME_MASTER_DOCUMENTATION.md), narrativa y guía académica en `docs/source/`.
+- [Documentación maestra y guion](docs/source/GAME_MASTER_DOCUMENTATION.md), narrativa y guía académica en `docs/source/`.
 
 Aidan: [Evil Wizard 2 de LuizMelo](https://luizmelo.itch.io/evil-wizard-2), CC0. Audio: [Interface Sounds](https://kenney.nl/assets/interface-sounds) e [Impact Sounds](https://kenney.nl/assets/impact-sounds) de Kenney, CC0. Naturaleza, ciudad y slimes: paquetes Freebie aprobados de CraftPix, con licencia registrada en el inventario. Solo se integraron los PNG usados; los ZIP, PSD, cupones y demostraciones quedan fuera de la distribución. Las plataformas físicas se dibujan por código, separadas del fondo. No se extrajo música de YouTube.
 
@@ -92,7 +90,7 @@ Para servir el paquete web sin instalar Node: `python3 -m http.server 8080` y ab
 
 ## Dificultad global
 
-El menú permite elegir Fácil, Media o Hard. Se guarda para todos los actos y se aplica al entrar o reintentar un nivel; cambiarla conserva checkpoints y bajas. Los actos 3 y 4 podrán usar el mismo perfil cuando estén implementados. Las prácticas conservan su balance didáctico.
+El menú permite elegir Fácil, Media o Hard. Se guarda para todos los actos y se aplica al entrar o reintentar un nivel; cambiarla conserva checkpoints y bajas. El duelo con el dragón ajusta su balance con el mismo selector. Las prácticas conservan su balance didáctico.
 
 | Perfil | Vida | Invulnerabilidad | Slime: velocidad / pausa entre ataques | Huecos principales | Ruinas |
 | --- | --- | --- | --- | --- | --- |

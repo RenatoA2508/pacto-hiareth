@@ -8,12 +8,10 @@ VERSION = json.loads((ROOT / 'package.json').read_text())['version']
 OUT = ROOT / 'release'
 OUT.mkdir(exist_ok=True)
 assert (ROOT / 'dist/index.html').is_file(), 'Ejecutar npm run build primero'
-instructions = '''El pacto de Hiareth — incremento de desarrollo
+instructions = '''El pacto de Hiareth
 
-Esta versión incluye dos niveles (bosque y ciudad), slimes, checkpoints,
-contador de bajas y el relato disponible de los primeros dos actos, además
-de prólogo, laboratorio de movimiento y entrenamiento de combate.
-Los actos posteriores y el cierre del relato todavía están pendientes.
+Cinco actos, dos desenlaces y un duelo por turnos. Se incluyen prólogo,
+laboratorio de movimiento y entrenamiento de combate.
 
 Web compilada: desde esta carpeta ejecutar python3 -m http.server 8080
 y abrir http://localhost:8080 . No abrir index.html con file://.

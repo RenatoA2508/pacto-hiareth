@@ -12,6 +12,8 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     const { width, height, offsetX, offsetY } = art.body;
     this.body.setSize(width, height).setOffset(offsetX, offsetY);
     this.setCollideWorldBounds(true);
+    this.patrolOrigin = x;
+    this.patrolDirection = -1;
     this.vitals = new Vitals(config.maxHealth, config.invulnerabilityMs);
     this.brain = new EnemyBrain(config); this.facing = -1; this.visualState = null;
     this.label = scene.add.text(x, y - 76, name, { font: '9px Arial', color: '#e1e4cf', backgroundColor: '#14242b', padding: { x: 4, y: 2 } }).setOrigin(0.5);
@@ -27,12 +29,23 @@ export class BaseEnemy extends Phaser.Physics.Arcade.Sprite {
     const blocked = direction < 0 ? this.body.blocked.left : this.body.blocked.right;
     if (this.brain.attack.phase(now) === 'idle' && this.brain.state !== 'HURT') this.facing = direction;
     const state = this.brain.update(now, { dx, dy, blocked: blocked || !hasFloor });
+    const outsideDetection = Math.abs(dx) > this.config.detectionX || Math.abs(dy) > this.config.detectionY;
+    let velocity = state === 'CHASE' ? direction * this.config.speed : 0;
+    if (state === 'IDLE' && outsideDetection && this.config.patrolRadius && this.body.blocked.down) {
+      const step = this.patrolDirection;
+      const edge = this.body.center.x + step * (this.body.width / 2 + 16);
+      const safe = this.platforms.some((p) => edge >= p.x && edge <= p.x + p.width && Math.abs(p.y - this.body.bottom) < 20);
+      if (!safe || (this.x - this.patrolOrigin) * step >= this.config.patrolRadius) this.patrolDirection *= -1;
+      this.facing = this.patrolDirection;
+      velocity = this.config.speed * 0.52 * this.facing;
+    }
     this.setFlipX(this.facing < 0);
-    this.setVelocityX(state === 'CHASE' && this.body.blocked.down ? direction * this.config.speed : 0);
+    this.setVelocityX(this.body.blocked.down ? velocity : 0);
     if (this.animationKeys) {
-      const key = { IDLE: 'idle', CHASE: 'walk', ATTACK: 'attack', HURT: 'hurt' }[state];
-      if (this.visualState !== state) this.play(this.animationKeys[key]);
-      this.visualState = state;
+      const visualState = state === 'IDLE' && velocity ? 'CHASE' : state;
+      const key = { IDLE: 'idle', CHASE: 'walk', ATTACK: 'attack', HURT: 'hurt' }[visualState];
+      if (this.visualState !== visualState) this.play(this.animationKeys[key]);
+      this.visualState = visualState;
       this.setTint(state === 'HURT' ? 0xffd6b0 : 0xffffff);
       this.label.setText(`${this.displayName} · ${this.vitals.current}/${this.vitals.max}`);
     } else {

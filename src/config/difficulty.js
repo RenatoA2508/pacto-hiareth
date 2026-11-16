@@ -1,7 +1,7 @@
 import { PLAYER_COMBAT } from './combat.js';
 import { SLIME_COMBAT } from './level1.js';
 
-// Configuración global reutilizable por los cuatro actos. No modifica el relato.
+// Configuración global de dificultad. No modifica el relato.
 export const DIFFICULTIES = Object.freeze({
   easy: { label: 'Fácil', health: 5, invulnerabilityMs: 1200, speed: 55, cooldownMs: 2000, gapExtra: -30, platformTrim: 0, cityGap: 0, description: '5 vidas · slimes tranquilos · saltos amplios' },
   medium: { label: 'Media', health: 3, invulnerabilityMs: 900, speed: 85, cooldownMs: 1450, gapExtra: 30, platformTrim: 20, cityGap: 90, description: '3 vidas · slimes activos · más saltos en las ruinas' },

@@ -12,13 +12,13 @@ function store() {
 }
 const counts = { checkpointCount: LEVEL1.checkpoints.length, enemyCount: LEVEL1.enemies.length };
 
-test('el nivel se completa con cero bajas y sin conceder puntos', () => {
+test('el nivel concede puntos de avance con cero bajas', () => {
   const storage = store(); const progress = new LevelProgress(storage, counts);
   progress.reachCheckpoint(1); progress.reachCheckpoint(2); progress.complete();
   assert.equal(storage.data.level1Complete, true);
   assert.equal(storage.data.levelReached, 1);
   assert.deepEqual(storage.data.level1Killed, []);
-  assert.equal(storage.data.highScore, 0);
+  assert.equal(storage.data.highScore, 700);
 });
 test('una baja se cuenta una sola vez y persiste independientemente del puntaje', () => {
   const storage = store(); const progress = new LevelProgress(storage, counts);
@@ -61,13 +61,47 @@ test('el segundo nivel guarda su avance sin perder las bajas del primero', () =>
   assert.equal(storage.data.level2Checkpoint, 1);
   assert.deepEqual(storage.data.level1Killed, [0]);
   assert.equal(storage.data.level1Complete, true);
-  assert.equal(storage.data.highScore, 0);
+  assert.equal(storage.data.highScore, 1100);
 });
-test('la ciudad mantiene huecos y plataformas alcanzables sin enemigos inventados', () => {
+test('la ciudad mantiene huecos y plataformas alcanzables', () => {
   const range = MOVEMENT.speed * 2 * MOVEMENT.jumpSpeed / GAME.gravity;
   const rise = MOVEMENT.jumpSpeed ** 2 / (2 * GAME.gravity);
   const floor = LEVEL2.platforms.filter((p) => p.y === 470);
-  assert.deepEqual(LEVEL2.enemies, []);
+  assert.equal(LEVEL2.enemies.length, 4);
   for (let i = 1; i < floor.length; i++) assert.ok(floor[i].x - floor[i - 1].x - floor[i - 1].width < range - 20);
   for (const p of LEVEL2.platforms.filter((p) => p.y < 470)) assert.ok(470 - p.y <= rise);
+});
+
+test('puntos no se duplican al reintentar y récord persiste al reiniciar', () => {
+  const storage = store(); const first = new LevelProgress(storage, counts);
+  first.reachCheckpoint(1); first.defeat(0); first.reachCheckpoint(2); first.complete(); first.complete();
+  assert.equal(storage.data.highScore, 700);
+  const again = new LevelProgress(storage, counts); again.reset();
+  assert.equal(storage.data.highScore, 700);
+  again.reachCheckpoint(1); again.complete();
+  assert.equal(storage.data.highScore, 700);
+});
+test('bajas de ciudad persisten y no alteran puntuación', () => {
+  const storage = store(); const opts = { id: 2, checkpointCount: 3, enemyCount: 4 };
+  const city = new LevelProgress(storage, opts); city.defeat(2); city.defeat(2);
+  assert.deepEqual(new LevelProgress(storage, opts).killed, new Set([2]));
+  assert.equal(storage.data.highScore, 0);
+});
+
+test('completar un recorrido conserva el próximo capítulo al reanudar', () => {
+  const storage = store();
+  storage.update({ endingStep: 'limbo', limboRoute: 'magic' });
+  const limbo = new LevelProgress(storage, { id: 3, checkpointCount: 3, enemyCount: 6 });
+  limbo.reachCheckpoint(1);
+  limbo.complete({ endingStep: 'valleyIntro', endingPage: 0 });
+
+  assert.equal(storage.data.endingStep, 'valleyIntro');
+  assert.equal(storage.data.limboRoute, 'magic');
+  assert.equal(storage.data.level3Complete, true);
+  assert.equal(storage.data.highScore, 600);
+
+  const rescue = new LevelProgress(storage, { id: 6, checkpointCount: 1, enemyCount: 3 });
+  rescue.complete({ endingStep: 'rescueDone' });
+  assert.equal(storage.data.endingStep, 'rescueDone');
+  assert.equal(storage.data.highScore, 600);
 });

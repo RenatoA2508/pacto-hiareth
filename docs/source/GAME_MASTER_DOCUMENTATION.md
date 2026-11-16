@@ -2,6 +2,8 @@
 
 ## Proyecto de videojuego web 2D --- *El pacto de Hiareth*
 
+> **Actualización.** La [sección 20](#20-guion-de-continuación) contiene el guion vigente de los actos 3, 4 y final y define el duelo con el dragón. Las referencias anteriores a actos pendientes y a un jefe sin definir o bloqueado describen el estado previo del proyecto.
+
 > **Documento de transferencia para un agente de desarrollo (Codex,
 > Claude u otro).**
 >
@@ -1868,3 +1870,151 @@ Guardar un `ASSET_CREDITS.md` con:
 
 No sobrescribir los ZIP originales. No incluir archivos de demostración que no formen parte de la licencia o del paquete.
 
+
+# 20. Guion de continuación
+
+El cerco que cierra el acto 2 conduce a dos rutas. Buscar refugio en el túnel expone a Aine al contagio. Abrir paso con fuego permite a ambos llegar sanos al valle. Las dos rutas pasan por el castillo y culminan en el duelo por el fragmento de Lia Fáil.
+
+## 20.1 Acto 3 · Limbo (Enfermedad)
+
+### El cerco
+
+Acabas de cruzar al Limbo junto a Aine. Su escudo se rompe y, entre los árboles, los esqueletos cierran el paso. A tu izquierda ves un hoyo por el que podrían bajar de uno en uno.
+
+Aine: Si saltamos ahí dentro, no podrán rodearnos.
+
+Aidan: Y si el túnel no tiene salida, tampoco podremos apartarnos. Puedo usar el fuego para abrirnos paso.
+
+Los esqueletos ya están a unos pasos. Aine te mira y espera tu señal.
+
+### Ruta del túnel
+
+Bajan por el hoyo y se arrastran bajo las raíces hasta ver luz. Cuando ayudas a Aine a subir, una mano de hueso la alcanza por el tobillo. Ella se zafa de una patada.
+
+Aine: Estoy bien. Vamos, antes de que encuentren la salida.
+
+A lo lejos se oyen patas contra la piedra. Entre los troncos, una luz se mueve como la de un portal.
+
+### Ruta de la magia
+
+Le pides a Aine que se agache. Una llamarada barre el suelo y los esqueletos retroceden. Corren juntos por el paso que queda abierto.
+
+Aine: Por aquí. Veo una luz entre los árboles.
+
+Los huesos quedan atrás. Entre ustedes y el portal se oyen patas raspando la piedra.
+
+## 20.2 Acto 4 · DON’T TRY
+
+### Llegada al valle
+
+Salen del Limbo a un valle de montañas. El sol calienta la ropa húmeda y, entre las flores, el viento mueve las hierbas como movía el trigo el día de tu boda.
+
+Un viajero descansa junto a un mojón. Lleva cosido el mismo emblema que viste en los autómatas de la antigua Federación.
+
+Aidan: Buscamos un fragmento de Lia Fáil. ¿Has oído hablar de él?
+
+Viajero: Dicen que lo custodian en el castillo. Sigan el camino de piedra. Por las flores no, que el terreno se abre hacia las galerías.
+
+Te vuelves para avisarle a Aine. La ves perder pie al otro lado del sendero. El borde cede bajo sus botas y cae por la grieta. La llamas. Desde abajo solo te llega el ruido de las piedras.
+
+Viajero: Hay una entrada a las galerías al pie de la ladera. Por ahí puedes bajar.
+
+### Ruta del túnel · Despedida
+
+Encuentras a Aine al final de la galería, apoyada contra la pared. La piel alrededor del tobillo se le ha oscurecido. La apartas del suelo frío y le sostienes la mano.
+
+Aine: El esqueleto me rozó al salir. Pensé que no era nada.
+
+Aidan: Aguanta. Voy a sacarte de aquí.
+
+Aine: Mi padre decía que volveríamos a la tierra. Quédate conmigo un momento. Háblame del campo de trigo.
+
+Le cuentas cómo se doblaban las espigas cuando Blair pasó entre ellas. A mitad de la historia dejas de sentir su mano apretando la tuya.
+
+Piensas en Callum y en Ciara, y en todas las veces que has repasado lo que habrías hecho para llegar antes a casa. Dices los tres nombres en voz alta. Después, recoges el frasco de Aine y vuelves al camino de piedra.
+
+### Ruta de la magia · Aine cautiva
+
+Al final de la galería ves a Aine detrás de una reja. Una banda vigila el paso. Ella se agarra a los barrotes cuando te reconoce.
+
+Aine: ¡Aidan! ¡Quiero vivir! ¡Ayúdame a salir!
+
+Recuerdas cómo te alcanzó al otro lado del portal, aun atada a la silla. Te acercas a la reja y enciendes el fuego en tus manos.
+
+Aidan: Apártate de la puerta. Ya estoy aquí.
+
+### Ruta de la magia · Después del rescate
+
+Cuando cae el último guardia, recoges la llave y abres la reja. Aine sale despacio. Se apoya en tu brazo hasta recuperar el equilibrio.
+
+Aidan: Pensé que te había perdido.
+
+Aine: Yo también tuve miedo. Me alegra que respondieras.
+
+Vuelven juntos al camino de piedra. Desde la ladera distinguen la torre del castillo.
+
+## 20.3 Acto final · HIARETH
+
+### Llegada al castillo · Aidan
+
+Llegas al castillo con el frasco de Aine en la mano. Te detienes ante la puerta. Podrías volver por donde viniste. Abres y entras.
+
+Al fondo del vestíbulo ves una escalera. El aire que baja de los pisos superiores huele a ceniza.
+
+### Llegada al castillo · Aidan y Aine
+
+Llegan a las puertas del castillo. Aine se detiene para recuperar el aliento. Esta vez esperas con ella.
+
+Aidan: ¿Puedes seguir?
+
+Aine: Sí. Entremos juntos.
+
+Empujan la puerta. Una escalera atraviesa el vestíbulo y sube hacia las habitaciones.
+
+### El dragón · Aidan
+
+En el último dormitorio, las cortinas de una cama enorme se mueven con cada respiración del dragón. Entre sus garras brilla el fragmento de Lia Fáil.
+
+Dragón: Has venido solo, pero llevas un frasco que no te pertenece.
+
+Aidan: Era de Aine. Antes perdí a mi esposa y a mis hijos. No sé qué hacer con otro nombre que solo puedo pronunciar yo.
+
+Dragón: Di su nombre cuando necesites decirlo. Y si mañana algo te hace reír, pregúntate qué le quitaría esa risa a lo que vivieron juntos.
+
+El dragón deja el fragmento junto a la cama y se incorpora.
+
+Dragón: Te lo entregaré si me vences. Cuando uno de los dos ceda, termina el duelo.
+
+### El dragón · Aidan y Aine
+
+Abren el último dormitorio. Un dragón se incorpora junto a una cama enorme. Entre sus garras brilla el fragmento de Lia Fáil.
+
+Dragón: Queda poca gente dispuesta a esperar a otra persona en el umbral de mi puerta.
+
+Aidan: He perdido a mi familia. Cuando alguien me importa, ya estoy pensando en el día en que podría perderlo.
+
+Dragón: Ese día llegará para los tres. Si hoy no tuvieras que decidir qué hacer con el resto de tu vida, ¿qué querrías hacer mañana?
+
+Aine: Mañana me gustaría desayunar al sol.
+
+El dragón deja el fragmento junto a la cama y se incorpora.
+
+Dragón: Te lo entregaré si me vences. Cuando uno de los dos ceda, termina el duelo.
+
+### Epílogo · Aidan
+
+El dragón inclina la cabeza y te entrega el fragmento. Al salir del castillo, guardas el fragmento y llevas el frasco de Aine contigo.
+
+Al pie de la montaña hay un campo de trigo. Te sientas a descansar. Dices el nombre de Aine y recuerdas el sonido de su voz al pedirte que le contaras de Blair.
+
+Empieza a clarear. Ves una casa al otro lado del campo y por la chimenea sale humo. Caminas hacia ella. Te gustaría pedir un poco de pan y un lugar donde sentarte.
+
+### Epílogo · Aidan y Aine
+
+El dragón inclina la cabeza y te entrega el fragmento. Sales del castillo con Aine. Al pie de la montaña, las primeras luces caen sobre un campo de trigo.
+
+Aidan: Cuando hablé con el líder del Pacto, le dije que al terminar iba a desaparecer. Hoy quiero desayunar. Luego, si te apetece, podemos seguir el camino juntos.
+
+Aine: Primero el desayuno.
+
+Ven una chimenea encendida al otro lado del campo y bajan hacia ella.

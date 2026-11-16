@@ -18,6 +18,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.play('aidan-idle');
     this.nextStepAt = 0;
     this.wasGrounded = false;
+    this.groundGraceUntil = -Infinity;
+    this.jumpBufferedUntil = -Infinity;
     this.combatEnabled = combat;
     this.combatConfig = combatConfig;
     this.vitals = new Vitals(combatConfig.maxHealth, combatConfig.invulnerabilityMs);
@@ -29,6 +31,8 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   move({ axis, jump, attack = false }) {
     const grounded = this.body.blocked.down;
     const now = this.scene.time.now;
+    if (grounded) this.groundGraceUntil = now + 80;
+    if (jump) this.jumpBufferedUntil = now + 120;
     const audio = this.scene.registry.get('audio');
     if (!this.vitals.alive) { this.setVelocityX(0); return; }
     this.setAlpha(now < this.vitals.invulnerableUntil && Math.floor(now / 100) % 2 === 0 ? 0.4 : 1);
@@ -43,14 +47,20 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     this.wasGrounded = grounded;
     this.setVelocityX(axis * MOVEMENT.speed);
     if (axis) { this.facing = Math.sign(axis); this.setFlipX(axis < 0); }
-    if (jump && this.body.blocked.down) this.setVelocityY(-MOVEMENT.jumpSpeed);
-    if (!this.body.blocked.down) this.play(this.body.velocity.y < 0 ? 'aidan-jump' : 'aidan-fall', true);
+    const jumpNow = now <= this.jumpBufferedUntil && now <= this.groundGraceUntil && this.body.velocity.y >= 0;
+    if (jumpNow) {
+      this.jumpBufferedUntil = -Infinity;
+      this.groundGraceUntil = -Infinity;
+      this.setVelocityY(-MOVEMENT.jumpSpeed);
+    }
+    if (jumpNow || !grounded) this.play(this.body.velocity.y < 0 ? 'aidan-jump' : 'aidan-fall', true);
     else this.play(axis ? 'aidan-run' : 'aidan-idle', true);
   }
 
   takeDamage(damage, now) {
     if (!this.vitals.receive(damage, now)) return false;
     this.attackCycle.cancel();
+    this.jumpBufferedUntil = -Infinity;
     this.setVelocityX(0);
     this.scene.registry.get('audio')?.play('land');
     if (!this.vitals.alive) this.play('aidan-death');

@@ -99,3 +99,30 @@ kbd { display: inline-flex; min-width: 21px; height: 24px; padding: 3px 5px; ali
 .stage:has(.difficulty-selector) .panel { padding-block: 3%; }
 .stage:has(.difficulty-selector) .panel .description { margin-bottom: 12px; }
 @media (max-width: 700px) { .stage:has(.difficulty-selector) { min-height: 520px; } .difficulty-selector { width: 100%; max-width: 360px; font-size: 11px; } }
+
+.walk-dialogue {
+  position: absolute;
+  left: 6%;
+  top: 23%;
+  z-index: 1;
+  display: grid;
+  gap: 5px;
+  max-width: min(470px, 88%);
+  padding: 10px 16px;
+  color: #f1eadc;
+  background: #111b25ee;
+  border: 1px solid #b49667;
+  box-shadow: 0 4px 16px #10101b65;
+  pointer-events: none;
+  font: clamp(12px, 1.6vw, 16px)/1.4 Georgia, serif;
+}
+.walk-dialogue[hidden], .stage:has(.panels .panel) .walk-dialogue { display: none; }
+.walk-dialogue strong { color: #f1cb8a; }
+.story-reader.story-visual {
+  background: linear-gradient(#101c22df, transparent 22%, transparent 55%, #101c22e6 75%);
+  grid-template-rows: auto 1fr auto auto;
+}
+.story-visual .story-body { grid-row: 3; background: #101c22f5; padding: 10px 14px; max-height: 30vh; }
+.story-visual footer { grid-row: 4; }
+.story-visual .story-speaker { margin-bottom: 4px; }
+.story-visual .story-text { font-size: clamp(15px, 2vw, 21px); line-height: 1.45; }

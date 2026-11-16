@@ -2,12 +2,12 @@ export const CITY_LAYERS = Object.freeze([
   { file: '1.png', factor: 0 }, { file: '2.png', factor: 0.12 },
   { file: '3.png', factor: 0.3 }, { file: '4.png', factor: 0.5 }, { file: '5.png', factor: 0.7 },
 ]);
-// La amenaza de los OVNIs aparece en el fondo aprobado. No define nuevos enemigos jugables.
+// Patrullas mecánicas; su origen narrativo todavía no está definido.
 export const LEVEL2 = Object.freeze({
   id: 2, biome: 'city', title: 'VUELA ALTO', width: 4200, height: 680,
   start: { x: 140, feetY: 468 }, portal: { x: 4010, feetY: 470 },
   checkpoints: [{ x: 140, feetY: 468 }, { x: 1550, feetY: 468 }, { x: 3000, feetY: 468 }],
-  enemies: [],
+  enemies: [560, 1650, 2750, 3820],
   platforms: [
     { x: 0, y: 470, width: 1000, height: 210 },
     { x: 1150, y: 470, width: 1150, height: 210 },

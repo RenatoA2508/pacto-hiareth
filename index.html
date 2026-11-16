@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#101a1e" />
-    <meta name="description" content="El pacto de Hiareth. Dos recorridos de un plataformas 2D narrativo con Phaser.js." />
+    <meta name="description" content="El pacto de Hiareth. Juego de plataformas 2D con cinco actos y dos desenlaces." />
     <link rel="icon" href="data:," />
     <title>El pacto de Hiareth</title>
   </head>
@@ -12,13 +12,13 @@
     <main class="app">
       <header class="masthead">
         <a class="brand" href="./" aria-label="El pacto de Hiareth, inicio"><span class="brand-mark" aria-hidden="true">✧</span> EL PACTO DE HIARETH</a>
-        <div class="header-tools"><button id="mute" type="button" aria-pressed="false">Silencio: no</button><span class="edition">DESARROLLO <span class="dot"></span> 0.5</span></div>
+        <div class="header-tools"><button id="mute" type="button" aria-pressed="false">Silencio: no</button><span class="edition">VERSIÓN <span class="dot"></span> 1.0</span></div>
       </header>
 
       <section class="game-shell" aria-label="Juego de plataformas">
         <div class="stage">
           <div id="game" tabindex="0" role="application" aria-label="Escena de plataformas. A y D o flechas para caminar; Espacio para saltar; Escape para pausar." aria-describedby="controls-help"></div>
-          <div id="loading" class="loading" role="status">Preparando la prueba… <span id="load-progress">0 %</span></div>
+          <div id="loading" class="loading" role="status">Cargando el juego… <span id="load-progress">0 %</span></div>
           <div id="fatal-error" class="fatal-error" role="alert" hidden></div>
           <div id="panels" class="panels"></div>
           <div id="hud" class="hud" hidden>
@@ -32,11 +32,11 @@
           <p id="mode-label">PRUEBA TÉCNICA <span aria-hidden="true">/</span> SIN COMBATE</p>
           <div class="action-controls"><button id="attack-button" type="button" data-control="attack" aria-label="Atacar" hidden>Atacar <span aria-hidden="true">J</span></button><button type="button" data-control="jump" aria-label="Saltar">Saltar <span aria-hidden="true">↑</span></button></div>
         </div>
-        <div class="stage-caption"><span><i aria-hidden="true"></i> Versión de desarrollo · actos 1 y 2</span><span>PHASER.JS / JAVASCRIPT</span></div>
+        <div class="stage-caption"><span><i aria-hidden="true"></i> El viaje de Aidan · cinco actos</span><span>PHASER.JS / JAVASCRIPT</span></div>
       </section>
 
       <section class="understage" aria-label="Información de la prueba">
-        <div><h2>Los viajes de Aidan.</h2><p>Recorre el bosque y las ruinas de la antigua federación. También puedes practicar los controles y leer el prólogo.</p></div>
+        <div><h2>Los viajes de Aidan.</h2><p>Atraviesa los portales con Aidan y descubre qué le espera al final de la prueba del Pacto.</p></div>
         <div id="controls-help" class="controls-help"><span><kbd>A</kbd><kbd>D</kbd> / <kbd>←</kbd><kbd>→</kbd> Caminar</span><span><kbd>Espacio</kbd> Saltar</span><span id="combat-help" hidden><kbd>J</kbd> Atacar</span><span><kbd>Esc</kbd> Pausa</span></div>
       </section>
       <footer class="footer"><span>Aplicaciones Web · Proyecto de plataformas 2D</span><span>Arte: LuizMelo y CraftPix · Audio: Kenney</span></footer>

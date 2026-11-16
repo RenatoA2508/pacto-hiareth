@@ -1,4 +1,10 @@
-# Estado del proyecto — 0.4.0
+# Estado del proyecto — 1.0.0
+
+La campaña incluye los cinco actos, la elección del Limbo, el rescate o la despedida de Aine, el castillo, el duelo por turnos y dos epílogos. El guion de la continuación figura en la [documentación maestra](source/GAME_MASTER_DOCUMENTATION.md). Los autómatas son defensas de la Antigua Federación. El puntaje recompensa el avance y el récord permanece entre viajes.
+
+Para la entrega académica quedan pendientes el video, la autoevaluación, las pruebas en dispositivos físicos y la música autorizada.
+
+## Registro histórico de la versión 0.4.0
 
 Fecha: 15 de noviembre de 2026. Dos niveles recorribles y todo el texto disponible de los actos 1 y 2 integrados. Esta versión todavía no completa el juego ni todos los entregables académicos.
 

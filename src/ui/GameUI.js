@@ -92,7 +92,18 @@ export class GameUI extends EventTarget {
     document.querySelector('#hud-title').textContent = 'ACTO 2 · VUELA ALTO';
     document.querySelector('#checkpoint-label').textContent = checkpoint ? `Checkpoint ${checkpoint}/2 · alcanza el portal` : 'Alcanza el portal';
     document.querySelector('#combat-health').textContent = `Vida ${health}/${maxHealth}`;
-    document.querySelector('#mode-label').textContent = 'ATRAVIESA LAS RUINAS';
+    document.querySelector('#mode-label').textContent = 'ESQUIVA LOS HACES · J PARA ATACAR';
+  }
+  journeyStats(level, vitals, progress, objective) {
+    const act = level.id === 5 ? 'ACTO FINAL' : `ACTO ${level.id === 6 ? 4 : level.id}`;
+    document.querySelector('#hud-title').textContent = `${act} · ${level.title}`;
+    document.querySelector('#checkpoint-label').textContent = progress.checkpoint
+      ? `Checkpoint ${progress.checkpoint}/${level.checkpoints.length - 1} · ${objective}` : objective;
+    const required = level.requiredEnemies ?? [];
+    const remaining = required.filter((id) => !progress.killed.has(id)).length;
+    const foes = required.length ? ` · ${level.id === 6 ? 'Captores' : 'Guardianes'} ${required.length - remaining}/${required.length}` : '';
+    document.querySelector('#combat-health').textContent = `Vida ${vitals.current}/${vitals.max}${foes}`;
+    document.querySelector('#mode-label').textContent = 'J · ATAQUE EN SUELO';
   }
   gameplay(active) {
     this.hud.hidden = !active;

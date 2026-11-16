@@ -17,6 +17,9 @@ export class BootScene extends Phaser.Scene {
       `aidan-${key}`, `${import.meta.env.BASE_URL}assets/images/characters/aidan/${file}`,
       { frameWidth: PLAYER_ART.frameWidth, frameHeight: PLAYER_ART.frameHeight },
     ));
+    this.load.image('victory-field', `${import.meta.env.BASE_URL}assets/images/epilogue/field.png`);
+    this.load.image('aine-idle', `${import.meta.env.BASE_URL}assets/images/characters/aine/idle.png`);
+    this.load.image('robot-idle', `${import.meta.env.BASE_URL}assets/images/enemies/robot/idle.png`);
     SOUND_EFFECTS.forEach(({ key, file }) => {
       const base = `${import.meta.env.BASE_URL}assets/audio/sfx/`;
       this.load.audio(key, [base + file, base + file.replace('.ogg', '.mp3')]);

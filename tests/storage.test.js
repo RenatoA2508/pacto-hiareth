@@ -74,3 +74,24 @@ test('el avance entre capítulos conserva campos anteriores y valida datos nuevo
   assert.equal(next.data.act2Page, 53);
   assert.deepEqual(next.data.level1Killed, [0]);
 });
+
+test('el avance y la lectura de la ruta del Limbo sobreviven al recargar', () => {
+  const disk = memoryStorage();
+  const first = new StorageManager(disk);
+  first.update({ endingStep: 'valleyEncounter', limboRoute: 'tunnel', endingPage: 3,
+    level3Complete: true, level4Complete: true, currentLevel: 4 });
+  const resumed = new StorageManager(disk);
+  assert.equal(resumed.data.endingStep, 'valleyEncounter');
+  assert.equal(resumed.data.limboRoute, 'tunnel');
+  assert.equal(resumed.data.endingPage, 3);
+  assert.equal(resumed.data.currentLevel, 4);
+});
+
+test('un guardado antiguo puede llegar al Limbo y uno incompleto no adelanta la ruta', () => {
+  const old = sanitizeSave({ version: 1, currentLevel: 2, level2Complete: true, act2Read: true });
+  assert.equal(old.endingStep, null);
+  assert.equal(old.limboRoute, null);
+  const invalid = sanitizeSave({ ...old, endingStep: 'dragon', endingPage: 8, limboRoute: 'unknown' });
+  assert.equal(invalid.endingStep, 'limboIntro');
+  assert.equal(invalid.endingPage, 0);
+});
